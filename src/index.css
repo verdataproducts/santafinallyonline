@@ -2,33 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Christmas Toy Store Design System */
+/* Fun Playful Toy Store Design System */
 
 @layer base {
   :root {
-    /* Christmas Red & Green Theme */
-    --background: 0 0% 100%;
-    --foreground: 355 70% 20%;
+    /* Playful Toy Store Theme - Bright & Energetic */
+    --background: 210 100% 98%;
+    --foreground: 240 20% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 355 70% 20%;
+    --card-foreground: 240 20% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 355 70% 20%;
+    --popover-foreground: 240 20% 15%;
 
-    /* Festive Red Primary */
-    --primary: 355 85% 45%;
+    /* Vibrant Blue Primary */
+    --primary: 210 100% 55%;
     --primary-foreground: 0 0% 100%;
 
-    /* Christmas Green Secondary */
-    --secondary: 145 70% 35%;
-    --secondary-foreground: 0 0% 100%;
+    /* Sunny Yellow Secondary */
+    --secondary: 45 100% 55%;
+    --secondary-foreground: 240 20% 15%;
 
-    /* Gold Accent */
-    --accent: 45 95% 50%;
-    --accent-foreground: 355 70% 20%;
+    /* Playful Purple Accent */
+    --accent: 280 85% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --muted: 210 20% 95%;
+    --muted: 210 30% 95%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
     --destructive: 0 84.2% 60.2%;
@@ -36,44 +36,44 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 355 85% 45%;
+    --ring: 210 100% 55%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    /* Christmas Gradients */
-    --gradient-festive: linear-gradient(135deg, hsl(355 85% 45%), hsl(145 70% 35%));
-    --gradient-snow: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 20% 95%));
-    --gradient-gold: linear-gradient(135deg, hsl(45 95% 50%), hsl(35 95% 45%));
+    /* Playful Gradients */
+    --gradient-toy: linear-gradient(135deg, hsl(210 100% 55%), hsl(280 85% 60%));
+    --gradient-fun: linear-gradient(135deg, hsl(45 100% 55%), hsl(25 100% 60%));
+    --gradient-rainbow: linear-gradient(90deg, hsl(0 100% 60%), hsl(45 100% 55%), hsl(120 70% 50%), hsl(210 100% 55%), hsl(280 85% 60%));
   }
 
   .dark {
-    --background: 355 30% 10%;
+    --background: 240 30% 8%;
     --foreground: 0 0% 98%;
 
-    --card: 355 30% 15%;
+    --card: 240 25% 12%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 355 30% 10%;
+    --popover: 240 30% 8%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 355 85% 55%;
+    --primary: 210 100% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 145 70% 40%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 45 100% 60%;
+    --secondary-foreground: 240 30% 8%;
 
-    --accent: 45 95% 55%;
-    --accent-foreground: 355 30% 10%;
+    --accent: 280 85% 65%;
+    --accent-foreground: 0 0% 100%;
 
-    --muted: 355 20% 20%;
+    --muted: 240 20% 15%;
     --muted-foreground: 215 20.2% 65.1%;
 
     --destructive: 0 62.8% 40.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 355 20% 25%;
-    --input: 355 20% 25%;
-    --ring: 355 85% 55%;
+    --border: 240 20% 20%;
+    --input: 240 20% 20%;
+    --ring: 210 100% 60%;
   }
 }
 
@@ -84,74 +84,64 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Nunito', 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Fredoka', 'Poppins', sans-serif;
+    font-family: 'Fredoka', 'Baloo 2', sans-serif;
     font-weight: 700;
   }
 }
 
 @layer utilities {
-  .gradient-festive {
-    background: var(--gradient-festive);
+  .gradient-toy {
+    background: var(--gradient-toy);
   }
 
-  .gradient-snow {
-    background: var(--gradient-snow);
+  .gradient-fun {
+    background: var(--gradient-fun);
   }
 
-  .gradient-gold {
-    background: var(--gradient-gold);
+  .gradient-rainbow {
+    background: var(--gradient-rainbow);
   }
 
-  @keyframes snowfall {
-    0% {
-      transform: translateY(-10vh) translateX(0);
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    90% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(110vh) translateX(100px);
-      opacity: 0;
-    }
-  }
-
-  @keyframes twinkle {
+  @keyframes float {
     0%, 100% {
-      opacity: 1;
-      transform: scale(1);
+      transform: translateY(0px);
     }
     50% {
-      opacity: 0.4;
-      transform: scale(0.8);
+      transform: translateY(-20px);
     }
   }
 
-  @keyframes sleigh-fly {
-    0% {
-      transform: translateX(0) translateY(0);
+  @keyframes bounce-fun {
+    0%, 100% {
+      transform: translateY(0);
     }
-    100% {
-      transform: translateX(calc(-100vw - 250px)) translateY(-30px);
+    50% {
+      transform: translateY(-10px);
     }
   }
 
-  .animate-snowfall {
-    animation: snowfall linear infinite;
+  @keyframes wiggle {
+    0%, 100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
   }
 
-  .animate-twinkle {
-    animation: twinkle 1.5s ease-in-out infinite;
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
   }
 
-  .animate-sleigh-fly {
-    animation: sleigh-fly 8s linear forwards;
+  .animate-bounce-fun {
+    animation: bounce-fun 1s ease-in-out infinite;
+  }
+
+  .animate-wiggle {
+    animation: wiggle 0.5s ease-in-out infinite;
   }
 }
