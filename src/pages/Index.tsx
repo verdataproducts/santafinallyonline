@@ -3,6 +3,7 @@ import { getProducts, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/ProductCard";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { ChristmasCountdown } from "@/components/ChristmasCountdown";
 import { useCurrency } from "@/hooks/useCurrency";
 import { useCartStore } from "@/stores/cartStore";
 import { useConfetti } from "@/hooks/useConfetti";
@@ -146,21 +147,24 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
-      {/* Floating toy decorations */}
-      <div className="fixed top-20 left-10 text-6xl animate-float opacity-30 pointer-events-none">🎈</div>
-      <div className="fixed top-40 right-20 text-5xl animate-float opacity-30 pointer-events-none" style={{ animationDelay: '1s' }}>🧸</div>
-      <div className="fixed bottom-40 left-20 text-4xl animate-bounce-fun opacity-30 pointer-events-none" style={{ animationDelay: '2s' }}>🎨</div>
-      <div className="fixed bottom-20 right-10 text-5xl animate-float opacity-30 pointer-events-none" style={{ animationDelay: '1.5s' }}>🎮</div>
+      {/* Christmas Countdown */}
+      <ChristmasCountdown />
+      
+      {/* Floating Christmas decorations */}
+      <div className="fixed top-20 left-10 text-6xl animate-float opacity-30 pointer-events-none">🎄</div>
+      <div className="fixed top-40 right-20 text-5xl animate-float opacity-30 pointer-events-none" style={{ animationDelay: '1s' }}>⛄</div>
+      <div className="fixed bottom-40 left-20 text-4xl animate-bounce-fun opacity-30 pointer-events-none" style={{ animationDelay: '2s' }}>🎁</div>
+      <div className="fixed bottom-20 right-10 text-5xl animate-float opacity-30 pointer-events-none" style={{ animationDelay: '1.5s' }}>🎅</div>
       
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4 mb-4">
             <div className="flex items-center gap-3">
-              <img src={santaLogo} alt="ToyBox Wonderland Logo" className="w-12 h-12" />
+              <img src={santaLogo} alt="Santa's Finally Online Logo" className="w-12 h-12" />
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent">ToyBox Wonderland</h1>
-                <p className="text-sm text-muted-foreground">Where Imagination Comes to Play! 🎉</p>
+                <h1 className="text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent">Santa's Finally Online</h1>
+                <p className="text-sm text-muted-foreground">Christmas Magic Delivered to Your Door! 🎅🎄</p>
               </div>
             </div>
             <CartDrawer />
@@ -366,7 +370,7 @@ const Index = () => {
       <footer className="bg-card border-t py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
-            © 2025 ToyBox Wonderland. Bringing joy to playtime, one amazing toy at a time! 🎈✨
+            © 2025 Santa's Finally Online. Spreading Christmas joy, one amazing toy at a time! 🎅🎄✨
           </p>
         </div>
       </footer>
