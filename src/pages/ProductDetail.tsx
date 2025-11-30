@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { getProducts, ShopifyProduct } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
 import { CartDrawer } from "@/components/CartDrawer";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { useCartStore } from "@/stores/cartStore";
 import { useCurrency } from "@/hooks/useCurrency";
 import { useConfetti } from "@/hooks/useConfetti";
@@ -190,6 +191,9 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* WhatsApp Support Button */}
+      <WhatsAppButton />
     </div>
   );
 };
