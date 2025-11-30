@@ -9,6 +9,13 @@ import { useConfetti } from "@/hooks/useConfetti";
 import { Loader2, ArrowLeft, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
@@ -78,7 +85,7 @@ const ProductDetail = () => {
   }
 
   const { node } = product;
-  const image = node.images.edges[0]?.node;
+  const images = node.images.edges;
   const price = node.priceRange.minVariantPrice;
 
   return (
@@ -99,15 +106,25 @@ const ProductDetail = () => {
       {/* Product Detail */}
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Product Image */}
-          <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
-            {image && (
-              <img
-                src={image.url}
-                alt={image.altText || node.title}
-                className="w-full h-full object-cover"
-              />
-            )}
+          {/* Product Image Carousel */}
+          <div className="relative">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {images.map((image, index) => (
+                  <CarouselItem key={index}>
+                    <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
+                      <img
+                        src={image.node.url}
+                        alt={image.node.altText || `${node.title} - Image ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-4" />
+              <CarouselNext className="right-4" />
+            </Carousel>
           </div>
 
           {/* Product Info */}
