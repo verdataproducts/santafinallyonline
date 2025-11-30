@@ -9,6 +9,8 @@ import { ChristmasLights } from "@/components/ChristmasLights";
 import { SantaSleigh } from "@/components/SantaSleigh";
 import { SnowEffect } from "@/components/SnowEffect";
 import { SEO } from "@/components/SEO";
+import { GoogleSearchConsole } from "@/components/GoogleSearchConsole";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { generateWebsiteStructuredData, generateOrganizationStructuredData } from "@/utils/structuredData";
 import { useCurrency } from "@/hooks/useCurrency";
 import { useCartStore } from "@/stores/cartStore";
@@ -156,8 +158,14 @@ const Index = () => {
   const websiteData = generateWebsiteStructuredData(baseUrl);
   const organizationData = generateOrganizationStructuredData();
 
+  // Google Search Console and Analytics IDs (set these in your environment)
+  const gscVerification = import.meta.env.VITE_GOOGLE_SEARCH_CONSOLE_VERIFICATION;
+  const gaId = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
+
   return (
     <>
+      <GoogleSearchConsole verificationCode={gscVerification} />
+      <GoogleAnalytics measurementId={gaId} />
       <SEO 
         title="Santa's Finally Online - Best Toys 2025 | LEGO, Nintendo, Action Figures"
         description="Shop trending toys for 2025! From LEGO sets to Nintendo Switch, action figures, STEM kits, and creative play. Premium quality, safety-tested, delivered to your door."
