@@ -21,6 +21,7 @@ const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
   const [product, setProduct] = useState<ShopifyProduct | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const addItem = useCartStore(state => state.addItem);
   const { formatPrice, currency, loading: currencyLoading } = useCurrency();
   const { fireworksBurst } = useConfetti();
@@ -107,8 +108,8 @@ const ProductDetail = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Product Image Carousel */}
-          <div className="relative">
-            <Carousel className="w-full">
+          <div className="space-y-4">
+            <Carousel className="w-full" opts={{ startIndex: selectedImageIndex }}>
               <CarouselContent>
                 {images.map((image, index) => (
                   <CarouselItem key={index}>
@@ -125,6 +126,27 @@ const ProductDetail = () => {
               <CarouselPrevious className="left-4" />
               <CarouselNext className="right-4" />
             </Carousel>
+
+            {/* Thumbnail Navigation */}
+            <div className="flex gap-2 overflow-x-auto pb-2">
+              {images.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => setSelectedImageIndex(index)}
+                  className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                    selectedImageIndex === index
+                      ? 'border-primary ring-2 ring-primary/20'
+                      : 'border-border hover:border-primary/50'
+                  }`}
+                >
+                  <img
+                    src={image.node.url}
+                    alt={`Thumbnail ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Product Info */}
