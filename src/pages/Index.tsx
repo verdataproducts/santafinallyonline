@@ -10,6 +10,7 @@ import { Loader2, Sparkles, Search, X } from "lucide-react";
 import { toast } from "sonner";
 import santaLogo from "@/assets/santa-logo.png";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -179,9 +180,14 @@ const Index = () => {
               </button>
             )}
             {!currencyLoading && currency !== 'KES' && (
-              <p className="text-xs text-muted-foreground mt-2 text-center">
-                Prices shown in {currency} (converted from KES)
-              </p>
+              <div className="flex items-center justify-center gap-2 mt-2">
+                <p className="text-xs text-muted-foreground">
+                  Prices shown in {currency} (converted from KES)
+                </p>
+                <Badge variant="secondary" className="text-xs px-2 py-0.5 gap-1">
+                  🌍 Auto-detected
+                </Badge>
+              </div>
             )}
           </div>
         </div>

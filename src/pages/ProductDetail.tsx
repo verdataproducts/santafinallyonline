@@ -7,13 +7,14 @@ import { useCartStore } from "@/stores/cartStore";
 import { useCurrency } from "@/hooks/useCurrency";
 import { Loader2, ArrowLeft, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
+import { Badge } from "@/components/ui/badge";
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
   const [product, setProduct] = useState<ShopifyProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const addItem = useCartStore(state => state.addItem);
-  const { formatPrice } = useCurrency();
+  const { formatPrice, currency, loading: currencyLoading } = useCurrency();
 
   useEffect(() => {
     async function fetchProduct() {
@@ -110,8 +111,15 @@ const ProductDetail = () => {
           <div className="flex flex-col">
             <h1 className="text-4xl font-bold mb-4">{node.title}</h1>
             
-            <div className="text-4xl font-bold text-primary mb-6">
-              {formatPrice(price.amount)}
+            <div className="mb-6">
+              <div className="text-4xl font-bold text-primary mb-2">
+                {formatPrice(price.amount)}
+              </div>
+              {!currencyLoading && currency !== 'KES' && (
+                <Badge variant="secondary" className="text-xs px-2 py-0.5 gap-1 inline-flex">
+                  🌍 Auto-detected
+                </Badge>
+              )}
             </div>
 
             <div className="prose prose-sm mb-8">
