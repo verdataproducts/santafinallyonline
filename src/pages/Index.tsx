@@ -11,7 +11,50 @@ import santaLogo from "@/assets/santa-logo.png";
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const addItem = useCartStore(state => state.addItem);
+
+  const categories = [
+    { id: "all", label: "All Toys", icon: "🎁" },
+    { id: "lego", label: "LEGO & Building", icon: "🧱" },
+    { id: "dolls", label: "Dolls & Plush", icon: "🧸" },
+    { id: "action", label: "Action Figures", icon: "🦸" },
+    { id: "games", label: "Games & Puzzles", icon: "🎮" },
+    { id: "stem", label: "STEM & Learning", icon: "🔬" },
+    { id: "arts", label: "Arts & Crafts", icon: "🎨" },
+  ];
+
+  const categorizeProduct = (title: string): string[] => {
+    const lowerTitle = title.toLowerCase();
+    const cats: string[] = ["all"];
+    
+    if (lowerTitle.includes("lego") || lowerTitle.includes("building") || lowerTitle.includes("magna") || lowerTitle.includes("blocks") || lowerTitle.includes("tiles")) {
+      cats.push("lego");
+    }
+    if (lowerTitle.includes("doll") || lowerTitle.includes("plush") || lowerTitle.includes("barbie") || lowerTitle.includes("baby alive") || lowerTitle.includes("squishmallow")) {
+      cats.push("dolls");
+    }
+    if (lowerTitle.includes("spider") || lowerTitle.includes("venom") || lowerTitle.includes("action") || lowerTitle.includes("figure")) {
+      cats.push("action");
+    }
+    if (lowerTitle.includes("game") || lowerTitle.includes("puzzle") || lowerTitle.includes("connect") || lowerTitle.includes("pigeon") || lowerTitle.includes("kanoodle") || lowerTitle.includes("nintendo")) {
+      cats.push("games");
+    }
+    if (lowerTitle.includes("smart") || lowerTitle.includes("tablet") || lowerTitle.includes("learning") || lowerTitle.includes("educational") || lowerTitle.includes("stem")) {
+      cats.push("stem");
+    }
+    if (lowerTitle.includes("play-doh") || lowerTitle.includes("slime") || lowerTitle.includes("craft") || lowerTitle.includes("fashion") || lowerTitle.includes("design") || lowerTitle.includes("art")) {
+      cats.push("arts");
+    }
+    
+    return cats;
+  };
+
+  const filteredProducts = products.filter(product => {
+    if (selectedCategory === "all") return true;
+    const productCategories = categorizeProduct(product.node.title);
+    return productCategories.includes(selectedCategory);
+  });
 
   useEffect(() => {
     async function fetchProducts() {
@@ -98,17 +141,48 @@ const Index = () => {
             </p>
           </div>
 
+          {/* Category Filters */}
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`
+                  px-6 py-3 rounded-full font-semibold transition-all duration-300
+                  flex items-center gap-2 border-2
+                  ${selectedCategory === category.id 
+                    ? "bg-primary text-primary-foreground border-primary shadow-lg scale-105" 
+                    : "bg-card text-foreground border-border hover:border-primary hover:scale-105 hover:shadow-md"
+                  }
+                `}
+              >
+                <span className="text-xl">{category.icon}</span>
+                <span>{category.label}</span>
+              </button>
+            ))}
+          </div>
+
           {loading ? (
             <div className="flex items-center justify-center py-20">
               <Loader2 className="w-8 h-8 animate-spin text-primary" />
             </div>
-          ) : products.length === 0 ? (
+          ) : filteredProducts.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-lg text-muted-foreground">No products found</p>
+              <p className="text-lg text-muted-foreground">
+                {products.length === 0 ? "No products found" : `No toys found in ${categories.find(c => c.id === selectedCategory)?.label}`}
+              </p>
+              {selectedCategory !== "all" && (
+                <button 
+                  onClick={() => setSelectedCategory("all")}
+                  className="mt-4 text-primary hover:underline font-semibold"
+                >
+                  View all toys
+                </button>
+              )}
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.node.id}
                   product={product}
