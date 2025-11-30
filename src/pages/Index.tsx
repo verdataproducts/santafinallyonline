@@ -4,6 +4,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ChristmasCountdown } from "@/components/ChristmasCountdown";
+import { useCurrency } from "@/hooks/useCurrency";
 import { useCartStore } from "@/stores/cartStore";
 import { Loader2, Sparkles, Search, X } from "lucide-react";
 import { toast } from "sonner";
@@ -17,6 +18,7 @@ const Index = () => {
   const [selectedAge, setSelectedAge] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const addItem = useCartStore(state => state.addItem);
+  const { formatPrice, currency, loading: currencyLoading } = useCurrency();
 
   const categories = [
     { id: "all", label: "All Toys", icon: "🎁" },
@@ -175,6 +177,11 @@ const Index = () => {
               >
                 <X className="w-5 h-5" />
               </button>
+            )}
+            {!currencyLoading && currency !== 'KES' && (
+              <p className="text-xs text-muted-foreground mt-2 text-center">
+                Prices shown in {currency} (converted from KES)
+              </p>
             )}
           </div>
         </div>
