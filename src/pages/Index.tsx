@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getProducts, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/ProductCard";
 import { CartDrawer } from "@/components/CartDrawer";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { useCartStore } from "@/stores/cartStore";
 import { Loader2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
@@ -149,6 +150,9 @@ const Index = () => {
           </p>
         </div>
       </footer>
+
+      {/* WhatsApp Support Button */}
+      <WhatsAppButton />
     </div>
   );
 };
