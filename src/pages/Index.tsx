@@ -6,6 +6,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ChristmasCountdown } from "@/components/ChristmasCountdown";
 import { useCurrency } from "@/hooks/useCurrency";
 import { useCartStore } from "@/stores/cartStore";
+import { useConfetti } from "@/hooks/useConfetti";
 import { Loader2, Sparkles, Search, X } from "lucide-react";
 import { toast } from "sonner";
 import santaLogo from "@/assets/santa-logo.png";
@@ -25,6 +26,7 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const addItem = useCartStore(state => state.addItem);
   const { formatPrice, currency, loading: currencyLoading } = useCurrency();
+  const { fireworksBurst } = useConfetti();
 
   const categories = [
     { id: "all", label: "All Toys", icon: "🎁" },
@@ -142,6 +144,7 @@ const Index = () => {
     };
     
     addItem(cartItem);
+    fireworksBurst();
     toast.success(`Added ${product.node.title} to cart!`, {
       position: 'top-center',
     });
