@@ -150,17 +150,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
+      {/* Christmas Countdown */}
+      <ChristmasCountdown />
+      
+      {/* Christmas Lights */}
+      <ChristmasLights />
+      
       {/* Snow Effect */}
       <SnowEffect />
       
       {/* Santa Sleigh */}
       <SantaSleigh />
-      
-      {/* Christmas Lights */}
-      <ChristmasLights />
-      
-      {/* Christmas Countdown */}
-      <ChristmasCountdown />
       
       {/* Floating Christmas decorations */}
       <div className="fixed top-20 left-10 text-6xl animate-float opacity-30 pointer-events-none">🎄</div>
