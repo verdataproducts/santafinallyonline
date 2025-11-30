@@ -6,7 +6,7 @@ export const WhatsAppButton = () => {
       href={`https://wa.me/${phoneNumber}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 bg-gradient-toy text-white rounded-full w-16 h-16 shadow-lg transition-all duration-300 hover:scale-110 group flex items-center justify-center animate-float relative"
+      className="fixed bottom-8 right-8 z-[100] bg-gradient-toy text-white rounded-full w-16 h-16 shadow-lg transition-all duration-300 hover:scale-110 group flex items-center justify-center animate-float"
       aria-label="Ask Santa"
       style={{
         boxShadow: '0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3)',
