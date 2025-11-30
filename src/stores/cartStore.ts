@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { ShopifyProduct } from '@/lib/shopify';
+import { useSoundStore } from './soundStore';
 
 export interface CartItem {
   product: ShopifyProduct;
@@ -129,6 +130,14 @@ export const useCartStore = create<CartStore>()(
       addItem: (item) => {
         const { items } = get();
         const existingItem = items.find(i => i.variantId === item.variantId);
+        
+        // Play jingle bell sound
+        const isMuted = useSoundStore.getState().isMuted;
+        if (!isMuted) {
+          const audio = new Audio('https://actions.google.com/sounds/v1/foley/jingle_bells.ogg');
+          audio.volume = 0.3;
+          audio.play().catch(err => console.log('Audio play failed:', err));
+        }
         
         if (existingItem) {
           set({
