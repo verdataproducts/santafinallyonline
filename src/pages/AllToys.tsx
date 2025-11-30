@@ -81,7 +81,10 @@ const AllToys = () => {
       <div className="fixed bottom-20 right-10 text-5xl animate-float opacity-30 pointer-events-none" style={{ animationDelay: '1.5s' }}>🎅</div>
       
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b">
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b relative overflow-hidden">
+        {/* Header decorative elements */}
+        <div className="absolute top-0 left-[5%] text-3xl opacity-20 animate-float pointer-events-none">🎪</div>
+        <div className="absolute top-0 right-[5%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🏆</div>
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
@@ -145,7 +148,15 @@ const AllToys = () => {
       </section>
 
       {/* Products Grid */}
-      <section className="pb-16">
+      <section className="pb-16 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-10 left-[5%] text-9xl opacity-5 animate-float pointer-events-none">🎁</div>
+        <div className="absolute top-40 right-[5%] text-8xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🎯</div>
+        <div className="absolute bottom-40 left-[10%] text-7xl opacity-5 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1s' }}>⭐</div>
+        <div className="absolute bottom-10 right-[15%] text-9xl opacity-5 animate-float pointer-events-none" style={{ animationDelay: '1.5s' }}>🎪</div>
+        <div className="absolute top-1/3 left-[50%] text-6xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.8s' }}>🏆</div>
+        <div className="absolute bottom-1/3 right-[8%] text-8xl opacity-5 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1.2s' }}>🎨</div>
+        
         <div className="container mx-auto px-4">
           {loading ? (
             <div className="flex items-center justify-center py-20">
@@ -170,7 +181,12 @@ const AllToys = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t py-8">
+      <footer className="bg-card border-t py-8 relative overflow-hidden">
+        {/* Footer decorative elements */}
+        <div className="absolute top-2 left-[10%] text-4xl opacity-20 animate-float pointer-events-none">🎄</div>
+        <div className="absolute top-2 right-[10%] text-4xl opacity-20 animate-bounce-fun pointer-events-none" style={{ animationDelay: '0.5s' }}>⛄</div>
+        <div className="absolute top-1/2 -translate-y-1/2 left-[30%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '1s' }}>✨</div>
+        <div className="absolute top-1/2 -translate-y-1/2 right-[30%] text-3xl opacity-20 animate-float pointer-events-none" style={{ animationDelay: '1.5s' }}>🌟</div>
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
             © 2025 Santa's Finally Online. Spreading Christmas joy, one amazing toy at a time! 🎅🎄✨
