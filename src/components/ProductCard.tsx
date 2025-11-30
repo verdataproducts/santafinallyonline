@@ -34,8 +34,12 @@ export function ProductCard({ product, onAddToCart, index = 0 }: ProductCardProp
         <div className="aspect-square overflow-hidden bg-muted">
           {image && (
             <img
-              src={image.url}
+              src={`${image.url}&width=400`}
+              srcSet={`${image.url}&width=200 200w, ${image.url}&width=400 400w, ${image.url}&width=600 600w`}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               alt={image.altText || node.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
             />
           )}
