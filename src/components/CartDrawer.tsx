@@ -23,7 +23,7 @@ export const CartDrawer = () => {
     removeItem, 
     createCheckout 
   } = useCartStore();
-  const { formatPrice, convertPrice, currency } = useCurrency();
+  const { formatPrice, convertPrice, currency, loading: currencyLoading } = useCurrency();
   
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = items.reduce((sum, item) => {
@@ -136,11 +136,20 @@ export const CartDrawer = () => {
               </div>
               
               <div className="flex-shrink-0 space-y-4 pt-4 border-t bg-background">
-                <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold">Total</span>
-                  <span className="text-xl font-bold">
-                    {currency} {totalPrice.toFixed(2)}
-                  </span>
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-lg font-semibold">Total</span>
+                    <span className="text-xl font-bold">
+                      {currency} {totalPrice.toFixed(2)}
+                    </span>
+                  </div>
+                  {!currencyLoading && currency !== 'KES' && (
+                    <div className="flex justify-end">
+                      <Badge variant="secondary" className="text-xs px-2 py-0.5 gap-1">
+                        🌍 Auto-detected
+                      </Badge>
+                    </div>
+                  )}
                 </div>
                 
                 <Button 
