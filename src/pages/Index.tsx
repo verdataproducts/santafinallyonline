@@ -56,7 +56,7 @@ const Index = () => {
               <div className="text-3xl">🎄</div>
               <div>
                 <h1 className="text-2xl font-bold text-primary">Holiday Toy Express</h1>
-                <p className="text-sm text-muted-foreground">Premium Christmas Toys for Every Child</p>
+                <p className="text-sm text-muted-foreground">Best-Selling Toys for Christmas 2025</p>
               </div>
             </div>
             <CartDrawer />
@@ -71,16 +71,16 @@ const Index = () => {
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-accent/20 px-4 py-2 rounded-full mb-6">
               <Sparkles className="w-4 h-4 text-accent" />
-              <span className="text-sm font-semibold">Christmas 2025 Collection</span>
+              <span className="text-sm font-semibold">Best-Selling Toys 2025</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Magical Christmas Toys
+              Top Toys for the Holidays
               <br />
-              <span className="text-primary">That Bring Joy</span>
+              <span className="text-primary">That Kids Really Want</span>
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Discover our premium selection of Christmas toys, from action figures to educational STEM kits. 
-              Perfect gifts for every child on your list.
+              Shop 2025's best-selling toys from LEGO to Nintendo Switch. Featuring action figures, STEM kits, creative play, and more. 
+              Find the perfect gift that will light up their face this Christmas.
             </p>
           </div>
         </div>
@@ -90,9 +90,9 @@ const Index = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Our Christmas Collection</h2>
+            <h2 className="text-4xl font-bold mb-4">Trending Toys for Christmas</h2>
             <p className="text-lg text-muted-foreground">
-              Hand-picked toys that make this Christmas unforgettable
+              The most wanted toys of 2025 - from classic favorites to latest releases
             </p>
           </div>
 
