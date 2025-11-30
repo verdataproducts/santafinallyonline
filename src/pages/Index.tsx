@@ -6,6 +6,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { useCartStore } from "@/stores/cartStore";
 import { Loader2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
+import santaLogo from "@/assets/santa-logo.png";
 
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -54,7 +55,7 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="text-3xl">🎄</div>
+              <img src={santaLogo} alt="Santa's Finally Online Logo" className="w-12 h-12" />
               <div>
                 <h1 className="text-2xl font-bold text-primary">Santa's Finally Online</h1>
                 <p className="text-sm text-muted-foreground">Best-Selling Toys for Christmas 2025</p>
