@@ -105,19 +105,24 @@ const ProductDetail = () => {
       </header>
 
       {/* Product Detail */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-20 left-[5%] text-8xl opacity-5 animate-float pointer-events-none">🎁</div>
+        <div className="absolute top-40 right-[5%] text-7xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>⭐</div>
+        <div className="absolute bottom-20 left-[10%] text-9xl opacity-5 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1s' }}>🎪</div>
+        
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Product Image Carousel */}
-          <div className="space-y-4">
+          <div className="space-y-4 animate-fade-in">
             <Carousel className="w-full" opts={{ startIndex: selectedImageIndex }}>
               <CarouselContent>
                 {images.map((image, index) => (
                   <CarouselItem key={index}>
-                    <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
+                    <div className="aspect-square rounded-2xl overflow-hidden bg-muted hover:shadow-2xl transition-all duration-300">
                       <img
                         src={image.node.url}
                         alt={image.node.altText || `${node.title} - Image ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                   </CarouselItem>
@@ -133,11 +138,12 @@ const ProductDetail = () => {
                 <button
                   key={index}
                   onClick={() => setSelectedImageIndex(index)}
-                  className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                  className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all hover:scale-110 animate-scale-in ${
                     selectedImageIndex === index
-                      ? 'border-primary ring-2 ring-primary/20'
+                      ? 'border-primary ring-2 ring-primary/20 scale-105'
                       : 'border-border hover:border-primary/50'
                   }`}
+                  style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   <img
                     src={image.node.url}
@@ -150,31 +156,31 @@ const ProductDetail = () => {
           </div>
 
           {/* Product Info */}
-          <div className="flex flex-col">
-            <h1 className="text-4xl font-bold mb-4">{node.title}</h1>
+          <div className="flex flex-col animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <h1 className="text-4xl font-bold mb-4 hover:scale-105 transition-transform inline-block">{node.title}</h1>
             
-            <div className="mb-6">
-              <div className="text-4xl font-bold text-primary mb-2">
+            <div className="mb-6 animate-scale-in" style={{ animationDelay: '0.3s' }}>
+              <div className="text-4xl font-bold text-primary mb-2 hover:animate-wiggle">
                 {formatPrice(price.amount)}
               </div>
               {!currencyLoading && currency !== 'KES' && (
-                <Badge variant="secondary" className="text-xs px-2 py-0.5 gap-1 inline-flex">
+                <Badge variant="secondary" className="text-xs px-2 py-0.5 gap-1 inline-flex animate-fade-in">
                   🌍 Auto-detected
                 </Badge>
               )}
             </div>
 
-            <div className="prose prose-sm mb-8">
+            <div className="prose prose-sm mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
               <p className="text-lg text-muted-foreground">{node.description}</p>
             </div>
 
-            <div className="mt-auto">
+            <div className="mt-auto animate-scale-in" style={{ animationDelay: '0.5s' }}>
               <Button 
                 onClick={handleAddToCart}
                 size="lg"
-                className="w-full text-lg py-6"
+                className="w-full text-lg py-6 hover:scale-105 transition-transform"
               >
-                <ShoppingCart className="mr-2 h-5 w-5" />
+                <ShoppingCart className="mr-2 h-5 w-5 hover:animate-wiggle" />
                 Add to Cart
               </Button>
             </div>
