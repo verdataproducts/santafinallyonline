@@ -49,8 +49,8 @@ export interface ShopifyProduct {
 }
 
 const STOREFRONT_QUERY = `
-  query GetProducts($first: Int!) {
-    products(first: $first) {
+  query GetProducts($first: Int!, $sortKey: ProductSortKeys) {
+    products(first: $first, sortKey: $sortKey) {
       edges {
         node {
           id
@@ -124,7 +124,14 @@ export async function storefrontApiRequest(query: string, variables: any = {}) {
   return data;
 }
 
-export async function getProducts(count: number = 20): Promise<ShopifyProduct[]> {
-  const data = await storefrontApiRequest(STOREFRONT_QUERY, { first: count });
+export async function getProducts(count: number = 20, sortKey?: string): Promise<ShopifyProduct[]> {
+  const data = await storefrontApiRequest(STOREFRONT_QUERY, { 
+    first: count,
+    sortKey: sortKey || null
+  });
   return data.data.products.edges;
+}
+
+export async function getProductsByPopularity(count: number = 50): Promise<ShopifyProduct[]> {
+  return getProducts(count, 'BEST_SELLING');
 }

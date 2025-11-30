@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getProducts, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/ProductCard";
 import { CartDrawer } from "@/components/CartDrawer";
@@ -15,6 +16,7 @@ import { toast } from "sonner";
 import santaLogo from "@/assets/santa-logo.png";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -179,7 +181,15 @@ const Index = () => {
                 <p className="text-sm text-muted-foreground">Christmas Magic Delivered to Your Door! 🎅🎄</p>
               </div>
             </div>
-            <CartDrawer />
+            <div className="flex items-center gap-3">
+              <Link to="/all-toys">
+                <Button variant="outline" className="gap-2">
+                  <span>View All Toys</span>
+                  <Badge variant="secondary">{products.length}</Badge>
+                </Button>
+              </Link>
+              <CartDrawer />
+            </div>
           </div>
           
           {/* Search Bar */}
