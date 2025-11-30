@@ -4,6 +4,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ChristmasCountdown } from "@/components/ChristmasCountdown";
+import { ChristmasLights } from "@/components/ChristmasLights";
 import { useCurrency } from "@/hooks/useCurrency";
 import { useCartStore } from "@/stores/cartStore";
 import { useConfetti } from "@/hooks/useConfetti";
@@ -147,6 +148,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
+      {/* Christmas Lights */}
+      <ChristmasLights />
+      
       {/* Christmas Countdown */}
       <ChristmasCountdown />
       
