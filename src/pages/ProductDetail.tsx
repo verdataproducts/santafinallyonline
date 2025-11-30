@@ -124,8 +124,12 @@ const ProductDetail = () => {
                   <CarouselItem key={index}>
                     <div className="aspect-square rounded-2xl overflow-hidden bg-muted hover:shadow-2xl transition-all duration-300">
                       <img
-                        src={image.node.url}
+                        src={`${image.node.url}&width=800`}
+                        srcSet={`${image.node.url}&width=400 400w, ${image.node.url}&width=800 800w, ${image.node.url}&width=1200 1200w`}
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         alt={image.node.altText || `${node.title} - Image ${index + 1}`}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        decoding="async"
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                       />
                     </div>
@@ -150,8 +154,10 @@ const ProductDetail = () => {
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   <img
-                    src={image.node.url}
+                    src={`${image.node.url}&width=100`}
                     alt={`Thumbnail ${index + 1}`}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </button>
