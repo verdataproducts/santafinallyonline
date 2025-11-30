@@ -70,14 +70,6 @@ export default {
             height: "0",
           },
         },
-        "snowfall": {
-          "0%": {
-            transform: "translateY(-10vh) translateX(0)",
-          },
-          "100%": {
-            transform: "translateY(100vh) translateX(50px)",
-          },
-        },
         "float": {
           "0%, 100%": {
             transform: "translateY(0px)",
@@ -86,17 +78,34 @@ export default {
             transform: "translateY(-20px)",
           },
         },
+        "bounce-fun": {
+          "0%, 100%": {
+            transform: "translateY(0)",
+          },
+          "50%": {
+            transform: "translateY(-10px)",
+          },
+        },
+        "wiggle": {
+          "0%, 100%": {
+            transform: "rotate(-3deg)",
+          },
+          "50%": {
+            transform: "rotate(3deg)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "snowfall": "snowfall 10s linear infinite",
         "float": "float 3s ease-in-out infinite",
+        "bounce-fun": "bounce-fun 1s ease-in-out infinite",
+        "wiggle": "wiggle 0.5s ease-in-out infinite",
       },
       backgroundImage: {
-        "gradient-festive": "var(--gradient-festive)",
-        "gradient-snow": "var(--gradient-snow)",
-        "gradient-gold": "var(--gradient-gold)",
+        "gradient-toy": "var(--gradient-toy)",
+        "gradient-fun": "var(--gradient-fun)",
+        "gradient-rainbow": "var(--gradient-rainbow)",
       },
     },
   },

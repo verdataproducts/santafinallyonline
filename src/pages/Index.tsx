@@ -3,7 +3,6 @@ import { getProducts, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/ProductCard";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { ChristmasCountdown } from "@/components/ChristmasCountdown";
 import { useCurrency } from "@/hooks/useCurrency";
 import { useCartStore } from "@/stores/cartStore";
 import { useConfetti } from "@/hooks/useConfetti";
@@ -12,11 +11,6 @@ import { toast } from "sonner";
 import santaLogo from "@/assets/santa-logo.png";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { SnowEffect } from "@/components/SnowEffect";
-import { ChristmasLights } from "@/components/ChristmasLights";
-import { ChristmasTree } from "@/components/ChristmasTree";
-import { SantaSleigh } from "@/components/SantaSleigh";
-import { SoundControl } from "@/components/SoundControl";
 
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -152,22 +146,21 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
-      <SnowEffect />
-      <ChristmasLights />
-      <SantaSleigh />
-      
-      {/* Christmas Countdown Banner */}
-      <ChristmasCountdown />
+      {/* Floating toy decorations */}
+      <div className="fixed top-20 left-10 text-6xl animate-float opacity-30 pointer-events-none">🎈</div>
+      <div className="fixed top-40 right-20 text-5xl animate-float opacity-30 pointer-events-none" style={{ animationDelay: '1s' }}>🧸</div>
+      <div className="fixed bottom-40 left-20 text-4xl animate-bounce-fun opacity-30 pointer-events-none" style={{ animationDelay: '2s' }}>🎨</div>
+      <div className="fixed bottom-20 right-10 text-5xl animate-float opacity-30 pointer-events-none" style={{ animationDelay: '1.5s' }}>🎮</div>
       
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4 mb-4">
             <div className="flex items-center gap-3">
-              <img src={santaLogo} alt="Santa's Finally Online Logo" className="w-12 h-12" />
+              <img src={santaLogo} alt="ToyBox Wonderland Logo" className="w-12 h-12" />
               <div>
-                <h1 className="text-2xl font-bold text-primary">Santa's Finally Online</h1>
-                <p className="text-sm text-muted-foreground">Best-Selling Toys for Christmas 2025</p>
+                <h1 className="text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent">ToyBox Wonderland</h1>
+                <p className="text-sm text-muted-foreground">Where Imagination Comes to Play! 🎉</p>
               </div>
             </div>
             <CartDrawer />
@@ -207,26 +200,28 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-festive opacity-10" />
-        <ChristmasTree className="absolute top-8 left-8 opacity-60 animate-fade-in" />
-        <ChristmasTree className="absolute top-8 right-8 opacity-60 animate-fade-in" style={{ animationDelay: '0.3s' }} />
-        <ChristmasTree className="absolute bottom-8 left-1/4 opacity-40 animate-fade-in" style={{ animationDelay: '0.6s' }} />
-        <ChristmasTree className="absolute bottom-8 right-1/4 opacity-40 animate-fade-in" style={{ animationDelay: '0.9s' }} />
+        <div className="absolute inset-0 bg-gradient-rainbow opacity-5" />
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-10 left-[10%] text-8xl opacity-10 animate-wiggle">🎪</div>
+          <div className="absolute top-20 right-[15%] text-7xl opacity-10 animate-float" style={{ animationDelay: '0.5s' }}>🎡</div>
+          <div className="absolute bottom-10 left-[20%] text-9xl opacity-10 animate-bounce-fun" style={{ animationDelay: '1s' }}>🎠</div>
+          <div className="absolute bottom-20 right-[10%] text-8xl opacity-10 animate-float" style={{ animationDelay: '1.5s' }}>🎢</div>
+        </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-accent/20 px-4 py-2 rounded-full mb-6 animate-scale-in">
               <Sparkles className="w-4 h-4 text-accent" />
-              <span className="text-sm font-semibold">Best-Selling Toys 2025</span>
+              <span className="text-sm font-semibold">Top Trending Toys 2025</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in">
-              Top Toys for the Holidays
+              The Ultimate Toy Store
               <br />
-              <span className="text-primary">That Kids Really Want</span>
+              <span className="bg-gradient-toy bg-clip-text text-transparent">For Every Kid's Dream!</span>
             </h2>
             <p className="text-xl text-muted-foreground mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              Shop 2025's best-selling toys from LEGO to Nintendo Switch. Featuring action figures, STEM kits, creative play, and more. 
-              Find the perfect gift that will light up their face this Christmas.
+              Discover 2025's hottest toys from LEGO to Nintendo Switch. Action figures, STEM kits, creative play & more. 
+              Find the perfect gift that sparks joy and endless fun! 🎉✨
             </p>
           </div>
         </div>
@@ -236,9 +231,9 @@ const Index = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Trending Toys for Christmas</h2>
+            <h2 className="text-4xl font-bold mb-4">🎯 Trending Toys Right Now</h2>
             <p className="text-lg text-muted-foreground">
-              The most wanted toys of 2025 - from classic favorites to latest releases
+              The most wanted toys of 2025 - from timeless classics to the latest must-haves
             </p>
           </div>
 
@@ -345,23 +340,23 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-16 bg-gradient-to-b from-muted/30 to-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-5xl mb-4">🎁</div>
+            <div className="text-center p-6 rounded-2xl bg-card hover:shadow-lg transition-shadow">
+              <div className="text-5xl mb-4 animate-bounce-fun">🎁</div>
               <h3 className="text-xl font-bold mb-2">Free Gift Wrapping</h3>
-              <p className="text-muted-foreground">Every order comes beautifully wrapped</p>
+              <p className="text-muted-foreground">Every order comes beautifully wrapped & ready to gift</p>
             </div>
-            <div className="text-center">
-              <div className="text-5xl mb-4">🚀</div>
-              <h3 className="text-xl font-bold mb-2">Fast Delivery</h3>
-              <p className="text-muted-foreground">Guaranteed delivery before Christmas</p>
+            <div className="text-center p-6 rounded-2xl bg-card hover:shadow-lg transition-shadow">
+              <div className="text-5xl mb-4 animate-float">🚀</div>
+              <h3 className="text-xl font-bold mb-2">Lightning Fast Delivery</h3>
+              <p className="text-muted-foreground">Get your toys delivered in record time</p>
             </div>
-            <div className="text-center">
-              <div className="text-5xl mb-4">⭐</div>
+            <div className="text-center p-6 rounded-2xl bg-card hover:shadow-lg transition-shadow">
+              <div className="text-5xl mb-4 animate-wiggle">⭐</div>
               <h3 className="text-xl font-bold mb-2">Premium Quality</h3>
-              <p className="text-muted-foreground">Carefully selected, safety-tested toys</p>
+              <p className="text-muted-foreground">Handpicked, safety-tested toys kids truly love</p>
             </div>
           </div>
         </div>
@@ -371,16 +366,13 @@ const Index = () => {
       <footer className="bg-card border-t py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
-            © 2025 Santa's Finally Online. Making Christmas magical, one toy at a time. 🎄
+            © 2025 ToyBox Wonderland. Bringing joy to playtime, one amazing toy at a time! 🎈✨
           </p>
         </div>
       </footer>
 
       {/* WhatsApp Support Button */}
       <WhatsAppButton />
-      
-      {/* Sound Control Button */}
-      <SoundControl />
     </div>
   );
 };
