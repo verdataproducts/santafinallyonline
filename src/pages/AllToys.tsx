@@ -83,21 +83,21 @@ const AllToys = () => {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b relative overflow-hidden">
         {/* Header decorative elements */}
-        <div className="absolute top-0 left-[5%] text-3xl opacity-20 animate-float pointer-events-none">🎪</div>
-        <div className="absolute top-0 right-[5%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🏆</div>
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
+        <div className="hidden md:block absolute top-0 left-[5%] text-3xl opacity-20 animate-float pointer-events-none">🎪</div>
+        <div className="hidden md:block absolute top-0 right-[5%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🏆</div>
+        <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
+          <div className="flex items-center justify-between gap-3 md:gap-4">
+            <div className="flex items-center gap-2 md:gap-3">
               <Link to="/">
-                <img src={santaLogo} alt="Santa's Finally Online Logo" className="w-12 h-12 cursor-pointer hover:scale-110 transition-transform" />
+                <img src={santaLogo} alt="Santa's Finally Online Logo" className="w-10 h-10 md:w-12 md:h-12 cursor-pointer hover:scale-110 transition-transform" />
               </Link>
               <div>
                 <Link to="/">
-                  <h1 className="text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer">
+                  <h1 className="text-lg md:text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer">
                     Santa's Finally Online
                   </h1>
                 </Link>
-                <p className="text-sm text-muted-foreground">Christmas Magic Delivered to Your Door! 🎅🎄</p>
+                <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">Christmas Magic Delivered to Your Door! 🎅🎄</p>
               </div>
             </div>
             <CartDrawer />
@@ -106,31 +106,31 @@ const AllToys = () => {
       </header>
 
       {/* Page Header */}
-      <section className="py-12 relative overflow-hidden">
+      <section className="py-8 md:py-12 relative overflow-hidden">
         {/* Background decorative elements */}
-        <div className="absolute top-5 left-[10%] text-7xl opacity-10 animate-float pointer-events-none">🎯</div>
-        <div className="absolute top-10 right-[15%] text-6xl opacity-10 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🏆</div>
-        <div className="absolute bottom-5 left-[20%] text-8xl opacity-10 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1s' }}>⭐</div>
+        <div className="hidden md:block absolute top-5 left-[10%] text-7xl opacity-10 animate-float pointer-events-none">🎯</div>
+        <div className="hidden md:block absolute top-10 right-[15%] text-6xl opacity-10 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🏆</div>
+        <div className="hidden md:block absolute bottom-5 left-[20%] text-8xl opacity-10 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1s' }}>⭐</div>
         
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-3 md:px-4">
           <Link to="/">
-            <Button variant="ghost" className="mb-6 gap-2 hover:scale-105 transition-transform">
-              <ArrowLeft className="w-4 h-4" />
+            <Button variant="ghost" className="mb-4 md:mb-6 gap-2 hover:scale-105 transition-transform text-sm md:text-base h-8 md:h-10">
+              <ArrowLeft className="w-3 h-3 md:w-4 md:h-4" />
               Back to Home
             </Button>
           </Link>
           
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 bg-accent/20 px-4 py-2 rounded-full mb-4 animate-scale-in">
-              <TrendingUp className="w-5 h-5 text-accent animate-wiggle" />
-              <span className="text-sm font-semibold">Sorted by Popularity</span>
+          <div className="text-center mb-6 md:mb-8">
+            <div className="inline-flex items-center gap-2 bg-accent/20 px-3 md:px-4 py-1.5 md:py-2 rounded-full mb-3 md:mb-4 animate-scale-in">
+              <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-accent animate-wiggle" />
+              <span className="text-xs md:text-sm font-semibold">Sorted by Popularity</span>
             </div>
-            <h1 className="text-5xl font-bold mb-4 animate-fade-in">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 animate-fade-in">
               All Christmas Toys
               <br />
               <span className="bg-gradient-toy bg-clip-text text-transparent">Best Sellers Collection</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.1s' }}>
+            <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.1s' }}>
               Browse our complete collection of {products.length} amazing toys, sorted by what's flying off the shelves! 🎁✨
             </p>
             {!currencyLoading && currency !== 'KES' && (

@@ -95,13 +95,13 @@ const ProductDetail = () => {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b relative overflow-hidden">
         {/* Header decorative elements */}
-        <div className="absolute top-0 left-[5%] text-3xl opacity-20 animate-float pointer-events-none">🎁</div>
-        <div className="absolute top-0 right-[5%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>⭐</div>
-        <div className="container mx-auto px-4 py-4">
+        <div className="hidden md:block absolute top-0 left-[5%] text-3xl opacity-20 animate-float pointer-events-none">🎁</div>
+        <div className="hidden md:block absolute top-0 right-[5%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>⭐</div>
+        <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <ArrowLeft className="w-5 h-5" />
-              <span className="font-semibold">Back to Store</span>
+              <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
+              <span className="text-sm md:text-base font-semibold">Back to Store</span>
             </Link>
             <CartDrawer />
           </div>
@@ -109,13 +109,13 @@ const ProductDetail = () => {
       </header>
 
       {/* Product Detail */}
-      <div className="container mx-auto px-4 py-12 relative overflow-hidden">
+      <div className="container mx-auto px-3 md:px-4 py-6 md:py-12 relative overflow-hidden">
         {/* Background decorative elements */}
-        <div className="absolute top-20 left-[5%] text-8xl opacity-5 animate-float pointer-events-none">🎁</div>
-        <div className="absolute top-40 right-[5%] text-7xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>⭐</div>
-        <div className="absolute bottom-20 left-[10%] text-9xl opacity-5 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1s' }}>🎪</div>
+        <div className="hidden md:block absolute top-20 left-[5%] text-8xl opacity-5 animate-float pointer-events-none">🎁</div>
+        <div className="hidden md:block absolute top-40 right-[5%] text-7xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>⭐</div>
+        <div className="hidden md:block absolute bottom-20 left-[10%] text-9xl opacity-5 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1s' }}>🎪</div>
         
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-12 max-w-6xl mx-auto">
           {/* Product Image Carousel */}
           <div className="space-y-4 animate-fade-in">
             <Carousel className="w-full" opts={{ startIndex: selectedImageIndex }}>
@@ -161,10 +161,10 @@ const ProductDetail = () => {
 
           {/* Product Info */}
           <div className="flex flex-col animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h1 className="text-4xl font-bold mb-4 hover:scale-105 transition-transform inline-block">{node.title}</h1>
+            <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 hover:scale-105 transition-transform inline-block">{node.title}</h1>
             
-            <div className="mb-6 animate-scale-in" style={{ animationDelay: '0.3s' }}>
-              <div className="text-4xl font-bold text-primary mb-2 hover:animate-wiggle">
+            <div className="mb-4 md:mb-6 animate-scale-in" style={{ animationDelay: '0.3s' }}>
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-2 hover:animate-wiggle">
                 {formatPrice(price.amount)}
               </div>
               {!currencyLoading && currency !== 'KES' && (
@@ -174,17 +174,17 @@ const ProductDetail = () => {
               )}
             </div>
 
-            <div className="prose prose-sm mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <p className="text-lg text-muted-foreground">{node.description}</p>
+            <div className="prose prose-sm mb-6 md:mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <p className="text-base md:text-lg text-muted-foreground">{node.description}</p>
             </div>
 
             <div className="mt-auto animate-scale-in" style={{ animationDelay: '0.5s' }}>
               <Button 
                 onClick={handleAddToCart}
                 size="lg"
-                className="w-full text-lg py-6 hover:scale-105 transition-transform"
+                className="w-full text-base md:text-lg py-5 md:py-6 hover:scale-105 transition-transform"
               >
-                <ShoppingCart className="mr-2 h-5 w-5 hover:animate-wiggle" />
+                <ShoppingCart className="mr-2 h-4 w-4 md:h-5 md:w-5 hover:animate-wiggle" />
                 Add to Cart
               </Button>
             </div>
