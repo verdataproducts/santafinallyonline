@@ -13,6 +13,7 @@ const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedAge, setSelectedAge] = useState<string>("all");
   const addItem = useCartStore(state => state.addItem);
 
   const categories = [
@@ -23,6 +24,15 @@ const Index = () => {
     { id: "games", label: "Games & Puzzles", icon: "🎮" },
     { id: "stem", label: "STEM & Learning", icon: "🔬" },
     { id: "arts", label: "Arts & Crafts", icon: "🎨" },
+  ];
+
+  const ageRanges = [
+    { id: "all", label: "All Ages", icon: "👶👧🧒" },
+    { id: "0-2", label: "0-2 Years", icon: "👶" },
+    { id: "3-5", label: "3-5 Years", icon: "👧" },
+    { id: "6-8", label: "6-8 Years", icon: "🧒" },
+    { id: "9-12", label: "9-12 Years", icon: "👦" },
+    { id: "teen", label: "Teens", icon: "🧑" },
   ];
 
   const categorizeProduct = (title: string): string[] => {
@@ -51,10 +61,42 @@ const Index = () => {
     return cats;
   };
 
+  const getProductAgeRanges = (title: string): string[] => {
+    const lowerTitle = title.toLowerCase();
+    const ages: string[] = ["all"];
+    
+    // Baby/Toddler (0-2)
+    if (lowerTitle.includes("baby") || lowerTitle.includes("toddler") || lowerTitle.includes("fisher-price")) {
+      ages.push("0-2");
+    }
+    
+    // Preschool (3-5)
+    if (lowerTitle.includes("play-doh") || lowerTitle.includes("melissa") || lowerTitle.includes("puzzle") || lowerTitle.includes("plush")) {
+      ages.push("3-5");
+    }
+    
+    // Elementary (6-8)
+    if (lowerTitle.includes("lego") || lowerTitle.includes("barbie") || lowerTitle.includes("hot wheels") || lowerTitle.includes("connect") || lowerTitle.includes("magna")) {
+      ages.push("6-8");
+    }
+    
+    // Tweens (9-12)
+    if (lowerTitle.includes("lol surprise") || lowerTitle.includes("nerf") || lowerTitle.includes("fashion") || lowerTitle.includes("squishmallow")) {
+      ages.push("9-12");
+    }
+    
+    // Teens
+    if (lowerTitle.includes("nintendo") || lowerTitle.includes("exploding") || lowerTitle.includes("kanoodle")) {
+      ages.push("teen");
+    }
+    
+    return ages;
+  };
+
   const filteredProducts = products.filter(product => {
-    if (selectedCategory === "all") return true;
-    const productCategories = categorizeProduct(product.node.title);
-    return productCategories.includes(selectedCategory);
+    const matchesCategory = selectedCategory === "all" || categorizeProduct(product.node.title).includes(selectedCategory);
+    const matchesAge = selectedAge === "all" || getProductAgeRanges(product.node.title).includes(selectedAge);
+    return matchesCategory && matchesAge;
   });
 
   useEffect(() => {
@@ -146,24 +188,51 @@ const Index = () => {
           </div>
 
           {/* Category Filters */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`
-                  px-6 py-3 rounded-full font-semibold transition-all duration-300
-                  flex items-center gap-2 border-2
-                  ${selectedCategory === category.id 
-                    ? "bg-primary text-primary-foreground border-primary shadow-lg scale-105" 
-                    : "bg-card text-foreground border-border hover:border-primary hover:scale-105 hover:shadow-md"
-                  }
-                `}
-              >
-                <span className="text-xl">{category.icon}</span>
-                <span>{category.label}</span>
-              </button>
-            ))}
+          <div className="mb-8">
+            <h3 className="text-center text-sm font-semibold text-muted-foreground mb-4">Browse by Category</h3>
+            <div className="flex flex-wrap justify-center gap-3">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`
+                    px-6 py-3 rounded-full font-semibold transition-all duration-300
+                    flex items-center gap-2 border-2
+                    ${selectedCategory === category.id 
+                      ? "bg-primary text-primary-foreground border-primary shadow-lg scale-105" 
+                      : "bg-card text-foreground border-border hover:border-primary hover:scale-105 hover:shadow-md"
+                    }
+                  `}
+                >
+                  <span className="text-xl">{category.icon}</span>
+                  <span>{category.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Age Range Filters */}
+          <div className="mb-12">
+            <h3 className="text-center text-sm font-semibold text-muted-foreground mb-4">Browse by Age</h3>
+            <div className="flex flex-wrap justify-center gap-3">
+              {ageRanges.map((age) => (
+                <button
+                  key={age.id}
+                  onClick={() => setSelectedAge(age.id)}
+                  className={`
+                    px-6 py-3 rounded-full font-semibold transition-all duration-300
+                    flex items-center gap-2 border-2
+                    ${selectedAge === age.id 
+                      ? "bg-secondary text-secondary-foreground border-secondary shadow-lg scale-105" 
+                      : "bg-card text-foreground border-border hover:border-secondary hover:scale-105 hover:shadow-md"
+                    }
+                  `}
+                >
+                  <span className="text-xl">{age.icon}</span>
+                  <span>{age.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
           {loading ? (
@@ -172,16 +241,30 @@ const Index = () => {
             </div>
           ) : filteredProducts.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-lg text-muted-foreground">
-                {products.length === 0 ? "No products found" : `No toys found in ${categories.find(c => c.id === selectedCategory)?.label}`}
+              <p className="text-lg text-muted-foreground mb-4">
+                {products.length === 0 
+                  ? "No products found" 
+                  : "No toys found matching your filters"}
               </p>
-              {selectedCategory !== "all" && (
-                <button 
-                  onClick={() => setSelectedCategory("all")}
-                  className="mt-4 text-primary hover:underline font-semibold"
-                >
-                  View all toys
-                </button>
+              {(selectedCategory !== "all" || selectedAge !== "all") && (
+                <div className="flex gap-3 justify-center">
+                  {selectedCategory !== "all" && (
+                    <button 
+                      onClick={() => setSelectedCategory("all")}
+                      className="text-primary hover:underline font-semibold"
+                    >
+                      Clear category
+                    </button>
+                  )}
+                  {selectedAge !== "all" && (
+                    <button 
+                      onClick={() => setSelectedAge("all")}
+                      className="text-secondary hover:underline font-semibold"
+                    >
+                      Clear age filter
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           ) : (
