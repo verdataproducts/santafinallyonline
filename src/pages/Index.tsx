@@ -5,15 +5,17 @@ import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ChristmasCountdown } from "@/components/ChristmasCountdown";
 import { useCartStore } from "@/stores/cartStore";
-import { Loader2, Sparkles } from "lucide-react";
+import { Loader2, Sparkles, Search, X } from "lucide-react";
 import { toast } from "sonner";
 import santaLogo from "@/assets/santa-logo.png";
+import { Input } from "@/components/ui/input";
 
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedAge, setSelectedAge] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const addItem = useCartStore(state => state.addItem);
 
   const categories = [
@@ -96,7 +98,10 @@ const Index = () => {
   const filteredProducts = products.filter(product => {
     const matchesCategory = selectedCategory === "all" || categorizeProduct(product.node.title).includes(selectedCategory);
     const matchesAge = selectedAge === "all" || getProductAgeRanges(product.node.title).includes(selectedAge);
-    return matchesCategory && matchesAge;
+    const matchesSearch = searchQuery === "" || 
+      product.node.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.node.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesAge && matchesSearch;
   });
 
   useEffect(() => {
@@ -142,7 +147,7 @@ const Index = () => {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-4 mb-4">
             <div className="flex items-center gap-3">
               <img src={santaLogo} alt="Santa's Finally Online Logo" className="w-12 h-12" />
               <div>
@@ -151,6 +156,26 @@ const Index = () => {
               </div>
             </div>
             <CartDrawer />
+          </div>
+          
+          {/* Search Bar */}
+          <div className="relative max-w-2xl mx-auto">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+            <Input
+              type="text"
+              placeholder="Search for toys by name or keyword..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-10 h-12 text-base"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            )}
           </div>
         </div>
       </header>
@@ -246,8 +271,16 @@ const Index = () => {
                   ? "No products found" 
                   : "No toys found matching your filters"}
               </p>
-              {(selectedCategory !== "all" || selectedAge !== "all") && (
-                <div className="flex gap-3 justify-center">
+              {(selectedCategory !== "all" || selectedAge !== "all" || searchQuery !== "") && (
+                <div className="flex gap-3 justify-center flex-wrap">
+                  {searchQuery !== "" && (
+                    <button 
+                      onClick={() => setSearchQuery("")}
+                      className="text-primary hover:underline font-semibold"
+                    >
+                      Clear search
+                    </button>
+                  )}
                   {selectedCategory !== "all" && (
                     <button 
                       onClick={() => setSelectedCategory("all")}
