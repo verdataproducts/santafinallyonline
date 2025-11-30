@@ -54,10 +54,10 @@ export function ProductCard({ product, onAddToCart, index = 0 }: ProductCardProp
         </div>
         <Button 
           onClick={() => onAddToCart(product)}
-          className="w-full"
+          className="w-full group/btn"
           size="lg"
         >
-          <ShoppingCart className="mr-2 h-4 w-4" />
+          <ShoppingCart className="mr-2 h-4 w-4 group-hover/btn:animate-bounce-fun" />
           Add to Cart
         </Button>
       </CardContent>
