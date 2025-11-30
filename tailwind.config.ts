@@ -104,6 +104,30 @@ export default {
             transform: "scale(0.8)",
           },
         },
+        "sleigh-fly": {
+          "0%": {
+            transform: "translate(0, 0)",
+          },
+          "100%": {
+            transform: "translate(-120vw, 20vh)",
+          },
+        },
+        "snowfall": {
+          "0%": {
+            transform: "translateY(-10vh) rotate(0deg)",
+            opacity: "0",
+          },
+          "10%": {
+            opacity: "1",
+          },
+          "90%": {
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translateY(110vh) rotate(360deg)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -112,6 +136,8 @@ export default {
         "bounce-fun": "bounce-fun 1s ease-in-out infinite",
         "wiggle": "wiggle 0.5s ease-in-out infinite",
         "twinkle": "twinkle 1.5s ease-in-out infinite",
+        "sleigh-fly": "sleigh-fly 8s linear forwards",
+        "snowfall": "snowfall linear infinite",
       },
       backgroundImage: {
         "gradient-toy": "var(--gradient-toy)",
