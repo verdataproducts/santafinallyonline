@@ -4,20 +4,32 @@ import { ShoppingCart } from "lucide-react";
 import { ShopifyProduct } from "@/lib/shopify";
 import { Link } from "react-router-dom";
 import { useCurrency } from "@/hooks/useCurrency";
+import { motion } from "framer-motion";
 
 interface ProductCardProps {
   product: ShopifyProduct;
   onAddToCart: (product: ShopifyProduct) => void;
+  index?: number;
 }
 
-export function ProductCard({ product, onAddToCart }: ProductCardProps) {
+export function ProductCard({ product, onAddToCart, index = 0 }: ProductCardProps) {
   const { node } = product;
   const image = node.images.edges[0]?.node;
   const price = node.priceRange.minVariantPrice;
   const { formatPrice } = useCurrency();
 
   return (
-    <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-2 hover:border-primary">
+    <motion.div
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.08,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      whileHover={{ y: -8 }}
+    >
+      <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-2 hover:border-primary h-full">
       <Link to={`/product/${node.handle}`}>
         <div className="aspect-square overflow-hidden bg-muted">
           {image && (
@@ -50,5 +62,6 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         </Button>
       </CardContent>
     </Card>
+    </motion.div>
   );
 }
