@@ -40,20 +40,20 @@ export const ChristmasCountdown = () => {
   const deliveryCutoff = timeLeft.days <= 14;
 
   return (
-    <div className="bg-gradient-festive text-primary-foreground py-2 px-4">
+    <div className="bg-gradient-to-r from-red-600 via-red-700 to-red-600 text-white py-3 px-4 shadow-lg">
       <div className="container mx-auto">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-sm">
-          <div className="flex items-center gap-2 font-bold">
-            <Clock className="w-4 h-4" />
-            <span>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-sm">
+          <div className="flex items-center gap-2 font-bold bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm">
+            <Clock className="w-5 h-5 text-yellow-300" />
+            <span className="text-lg">
               {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m until Christmas!
             </span>
           </div>
           
           {deliveryCutoff && (
-            <div className={`flex items-center gap-2 ${isLastMinute ? 'animate-pulse' : ''}`}>
-              <Package className="w-4 h-4" />
-              <span className="font-semibold">
+            <div className={`flex items-center gap-2 bg-black/40 px-4 py-2 rounded-full backdrop-blur-sm ${isLastMinute ? 'animate-pulse' : ''}`}>
+              <Package className="w-5 h-5 text-yellow-300" />
+              <span className="font-semibold text-base">
                 {isLastMinute 
                   ? "⚠️ Last chance for Christmas delivery!" 
                   : "🎁 Order soon for guaranteed Christmas delivery"}
