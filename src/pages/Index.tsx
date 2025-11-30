@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { SnowEffect } from "@/components/SnowEffect";
 import { ChristmasLights } from "@/components/ChristmasLights";
 import { ChristmasTree } from "@/components/ChristmasTree";
+import { SantaSleigh } from "@/components/SantaSleigh";
 
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -149,6 +150,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
       <SnowEffect />
       <ChristmasLights />
+      <SantaSleigh />
       
       {/* Christmas Countdown Banner */}
       <ChristmasCountdown />
