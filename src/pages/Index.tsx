@@ -3,6 +3,7 @@ import { getProducts, ShopifyProduct } from "@/lib/shopify";
 import { ProductCard } from "@/components/ProductCard";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { ChristmasCountdown } from "@/components/ChristmasCountdown";
 import { useCartStore } from "@/stores/cartStore";
 import { Loader2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
@@ -93,6 +94,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background">
+      {/* Christmas Countdown Banner */}
+      <ChristmasCountdown />
+      
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b">
         <div className="container mx-auto px-4 py-4">
