@@ -8,6 +8,8 @@ import { ChristmasCountdown } from "@/components/ChristmasCountdown";
 import { ChristmasLights } from "@/components/ChristmasLights";
 import { SantaSleigh } from "@/components/SantaSleigh";
 import { SnowEffect } from "@/components/SnowEffect";
+import { SEO } from "@/components/SEO";
+import { generateWebsiteStructuredData, generateOrganizationStructuredData } from "@/utils/structuredData";
 import { useCurrency } from "@/hooks/useCurrency";
 import { useCartStore } from "@/stores/cartStore";
 import { useConfetti } from "@/hooks/useConfetti";
@@ -150,8 +152,20 @@ const Index = () => {
     });
   };
 
+  const baseUrl = window.location.origin;
+  const websiteData = generateWebsiteStructuredData(baseUrl);
+  const organizationData = generateOrganizationStructuredData();
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
+    <>
+      <SEO 
+        title="Santa's Finally Online - Best Toys 2025 | LEGO, Nintendo, Action Figures"
+        description="Shop trending toys for 2025! From LEGO sets to Nintendo Switch, action figures, STEM kits, and creative play. Premium quality, safety-tested, delivered to your door."
+        canonical={baseUrl}
+        jsonLd={[websiteData, organizationData]}
+      />
+      
+      <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
       {/* Christmas Countdown */}
       <ChristmasCountdown />
       
@@ -178,9 +192,9 @@ const Index = () => {
         <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 md:gap-4 mb-3 md:mb-4">
             <div className="flex items-center gap-2 md:gap-3">
-              <img src={santaLogo} alt="Santa's Finally Online Logo" className="w-10 h-10 md:w-12 md:h-12" />
+              <img src={santaLogo} alt="Santa's Finally Online - Christmas Toy Store Logo" className="w-10 h-10 md:w-12 md:h-12" />
               <div>
-                <h1 className="text-lg md:text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent">Santa's Finally Online</h1>
+                <div className="text-lg md:text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent">Santa's Finally Online</div>
                 <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">Christmas Magic Delivered to Your Door! 🎅🎄</p>
               </div>
             </div>
@@ -244,11 +258,9 @@ const Index = () => {
               <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-accent" />
               <span className="text-xs md:text-sm font-semibold">Top Trending Toys 2025</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight animate-fade-in">
-              The Ultimate Toy Store
-              <br />
-              <span className="bg-gradient-toy bg-clip-text text-transparent">For Every Kid's Dream!</span>
-            </h2>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight animate-fade-in">
+              Best Toys 2025: LEGO, Nintendo Switch & Top Action Figures
+            </h1>
             <p className="text-base md:text-xl text-muted-foreground mb-6 md:mb-8 animate-fade-in px-4" style={{ animationDelay: '0.2s' }}>
               Discover 2025's hottest toys from LEGO to Nintendo Switch. Action figures, STEM kits, creative play & more. 
               Find the perfect gift that sparks joy and endless fun! 🎉✨
@@ -258,7 +270,7 @@ const Index = () => {
       </section>
 
       {/* Products Grid */}
-      <section className="py-16 relative overflow-hidden">
+      <main className="py-16 relative overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute top-10 left-[3%] text-8xl opacity-5 animate-float pointer-events-none">🎁</div>
         <div className="absolute top-32 right-[8%] text-7xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.7s' }}>🎨</div>
@@ -377,7 +389,7 @@ const Index = () => {
             </div>
           )}
         </div>
-      </section>
+      </main>
 
       {/* Features Section */}
       <section className="py-16 bg-gradient-to-b from-muted/30 to-background relative overflow-hidden">
@@ -424,6 +436,7 @@ const Index = () => {
       {/* WhatsApp Support Button */}
       <WhatsAppButton />
     </div>
+    </>
   );
 };
 
