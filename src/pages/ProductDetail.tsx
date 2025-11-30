@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { CartDrawer } from "@/components/CartDrawer";
 import { useCartStore } from "@/stores/cartStore";
 import { useCurrency } from "@/hooks/useCurrency";
+import { useConfetti } from "@/hooks/useConfetti";
 import { Loader2, ArrowLeft, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +16,7 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const addItem = useCartStore(state => state.addItem);
   const { formatPrice, currency, loading: currencyLoading } = useCurrency();
+  const { fireworksBurst } = useConfetti();
 
   useEffect(() => {
     async function fetchProduct() {
@@ -48,6 +50,7 @@ const ProductDetail = () => {
     };
     
     addItem(cartItem);
+    fireworksBurst();
     toast.success(`Added ${product.node.title} to cart!`, {
       position: 'top-center',
     });
