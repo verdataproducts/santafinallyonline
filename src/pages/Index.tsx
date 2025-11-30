@@ -171,7 +171,10 @@ const Index = () => {
       <div className="fixed bottom-20 right-10 text-5xl animate-float opacity-30 pointer-events-none" style={{ animationDelay: '1.5s' }}>🎅</div>
       
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b">
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b relative overflow-hidden">
+        {/* Header decorative elements */}
+        <div className="absolute top-0 left-[5%] text-3xl opacity-20 animate-float pointer-events-none">✨</div>
+        <div className="absolute top-0 right-[5%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🌟</div>
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4 mb-4">
             <div className="flex items-center gap-3">
@@ -254,7 +257,14 @@ const Index = () => {
       </section>
 
       {/* Products Grid */}
-      <section className="py-16">
+      <section className="py-16 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-10 left-[3%] text-8xl opacity-5 animate-float pointer-events-none">🎁</div>
+        <div className="absolute top-32 right-[8%] text-7xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.7s' }}>🎨</div>
+        <div className="absolute bottom-32 left-[12%] text-9xl opacity-5 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1.2s' }}>🎪</div>
+        <div className="absolute bottom-10 right-[5%] text-8xl opacity-5 animate-float pointer-events-none" style={{ animationDelay: '1.5s' }}>⭐</div>
+        <div className="absolute top-1/2 left-[50%] text-6xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.3s' }}>🎯</div>
+        
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">🎯 Trending Toys Right Now</h2>
@@ -396,7 +406,12 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t py-8">
+      <footer className="bg-card border-t py-8 relative overflow-hidden">
+        {/* Footer decorative elements */}
+        <div className="absolute top-2 left-[10%] text-4xl opacity-20 animate-float pointer-events-none">🎄</div>
+        <div className="absolute top-2 right-[10%] text-4xl opacity-20 animate-bounce-fun pointer-events-none" style={{ animationDelay: '0.5s' }}>⛄</div>
+        <div className="absolute top-1/2 -translate-y-1/2 left-[30%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '1s' }}>✨</div>
+        <div className="absolute top-1/2 -translate-y-1/2 right-[30%] text-3xl opacity-20 animate-float pointer-events-none" style={{ animationDelay: '1.5s' }}>🌟</div>
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
             © 2025 Santa's Finally Online. Spreading Christmas joy, one amazing toy at a time! 🎅🎄✨
