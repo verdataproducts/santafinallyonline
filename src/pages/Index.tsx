@@ -55,7 +55,7 @@ const Index = () => {
             <div className="flex items-center gap-3">
               <div className="text-3xl">🎄</div>
               <div>
-                <h1 className="text-2xl font-bold text-primary">Holiday Toy Express</h1>
+                <h1 className="text-2xl font-bold text-primary">Santa's Finally Online</h1>
                 <p className="text-sm text-muted-foreground">Best-Selling Toys for Christmas 2025</p>
               </div>
             </div>
@@ -145,7 +145,7 @@ const Index = () => {
       <footer className="bg-card border-t py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
-            © 2025 Holiday Toy Express. Making Christmas magical, one toy at a time. 🎄
+            © 2025 Santa's Finally Online. Making Christmas magical, one toy at a time. 🎄
           </p>
         </div>
       </footer>
