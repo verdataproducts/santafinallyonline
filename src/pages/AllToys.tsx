@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProductsByPopularity, ShopifyProduct } from "@/lib/shopify";
+import { SEO } from "@/components/SEO";
+import { generateBreadcrumbStructuredData } from "@/utils/structuredData";
 import { ProductCard } from "@/components/ProductCard";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -60,8 +62,23 @@ const AllToys = () => {
     });
   };
 
+  const baseUrl = window.location.origin;
+  const allToysUrl = `${baseUrl}/all-toys`;
+  const breadcrumbData = generateBreadcrumbStructuredData([
+    { name: "Home", url: baseUrl },
+    { name: "All Toys", url: allToysUrl }
+  ]);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
+    <>
+      <SEO 
+        title="All Toys - Complete Collection 2025"
+        description="Browse our complete collection of trending toys sorted by popularity. LEGO sets, dolls, action figures, STEM toys, games, and creative play sets. Shop best sellers now!"
+        canonical={allToysUrl}
+        jsonLd={breadcrumbData}
+      />
+      
+      <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
       {/* Christmas Countdown */}
       <ChristmasCountdown />
       
@@ -89,13 +106,13 @@ const AllToys = () => {
           <div className="flex items-center justify-between gap-3 md:gap-4">
             <div className="flex items-center gap-2 md:gap-3">
               <Link to="/">
-                <img src={santaLogo} alt="Santa's Finally Online Logo" className="w-10 h-10 md:w-12 md:h-12 cursor-pointer hover:scale-110 transition-transform" />
+                <img src={santaLogo} alt="Santa's Finally Online - Christmas Toy Store Logo" className="w-10 h-10 md:w-12 md:h-12 cursor-pointer hover:scale-110 transition-transform" />
               </Link>
               <div>
                 <Link to="/">
-                  <h1 className="text-lg md:text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer">
+                  <div className="text-lg md:text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer">
                     Santa's Finally Online
-                  </h1>
+                  </div>
                 </Link>
                 <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">Christmas Magic Delivered to Your Door! 🎅🎄</p>
               </div>
@@ -126,9 +143,7 @@ const AllToys = () => {
               <span className="text-xs md:text-sm font-semibold">Sorted by Popularity</span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 animate-fade-in">
-              All Christmas Toys
-              <br />
-              <span className="bg-gradient-toy bg-clip-text text-transparent">Best Sellers Collection</span>
+              All Best-Selling Toys 2025 - Complete Collection
             </h1>
             <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.1s' }}>
               Browse our complete collection of {products.length} amazing toys, sorted by what's flying off the shelves! 🎁✨
@@ -148,7 +163,7 @@ const AllToys = () => {
       </section>
 
       {/* Products Grid */}
-      <section className="pb-16 relative overflow-hidden">
+      <main className="pb-16 relative overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute top-10 left-[5%] text-9xl opacity-5 animate-float pointer-events-none">🎁</div>
         <div className="absolute top-40 right-[5%] text-8xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🎯</div>
@@ -179,7 +194,7 @@ const AllToys = () => {
             </div>
           )}
         </div>
-      </section>
+      </main>
 
       {/* Footer */}
       <footer className="bg-card border-t py-8 relative overflow-hidden">
@@ -198,6 +213,7 @@ const AllToys = () => {
       {/* WhatsApp Support Button */}
       <WhatsAppButton />
     </div>
+    </>
   );
 };
 

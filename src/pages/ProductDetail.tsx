@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getProducts, ShopifyProduct } from "@/lib/shopify";
+import { SEO } from "@/components/SEO";
+import { generateProductStructuredData, generateBreadcrumbStructuredData } from "@/utils/structuredData";
 import { Button } from "@/components/ui/button";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -89,9 +91,29 @@ const ProductDetail = () => {
   const { node } = product;
   const images = node.images.edges;
   const price = node.priceRange.minVariantPrice;
+  const baseUrl = window.location.origin;
+  const productUrl = `${baseUrl}/product/${node.handle}`;
+  
+  const productStructuredData = generateProductStructuredData(product, baseUrl);
+  const breadcrumbData = generateBreadcrumbStructuredData([
+    { name: "Home", url: baseUrl },
+    { name: node.title, url: productUrl }
+  ]);
+  
+  const firstImage = images[0]?.node;
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <SEO 
+        title={`${node.title} - Buy Now`}
+        description={node.description.slice(0, 155)}
+        canonical={productUrl}
+        ogImage={firstImage?.url}
+        type="product"
+        jsonLd={[productStructuredData, breadcrumbData]}
+      />
+      
+      <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b relative overflow-hidden">
         {/* Header decorative elements */}
@@ -109,7 +131,7 @@ const ProductDetail = () => {
       </header>
 
       {/* Product Detail */}
-      <div className="container mx-auto px-3 md:px-4 py-6 md:py-12 relative overflow-hidden">
+      <main className="container mx-auto px-3 md:px-4 py-6 md:py-12 relative overflow-hidden">
         {/* Background decorative elements */}
         <div className="hidden md:block absolute top-20 left-[5%] text-8xl opacity-5 animate-float pointer-events-none">🎁</div>
         <div className="hidden md:block absolute top-40 right-[5%] text-7xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>⭐</div>
@@ -166,7 +188,7 @@ const ProductDetail = () => {
           </div>
 
           {/* Product Info */}
-          <div className="flex flex-col animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <article className="flex flex-col animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 hover:scale-105 transition-transform inline-block">{node.title}</h1>
             
             <div className="mb-4 md:mb-6 animate-scale-in" style={{ animationDelay: '0.3s' }}>
@@ -194,13 +216,14 @@ const ProductDetail = () => {
                 Add to Cart
               </Button>
             </div>
-          </div>
+          </article>
         </div>
-      </div>
+      </main>
 
       {/* WhatsApp Support Button */}
       <WhatsAppButton />
     </div>
+    </>
   );
 };
 
