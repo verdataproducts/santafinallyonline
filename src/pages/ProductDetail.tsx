@@ -4,6 +4,7 @@ import { getProducts, ShopifyProduct } from "@/lib/shopify";
 import { Button } from "@/components/ui/button";
 import { CartDrawer } from "@/components/CartDrawer";
 import { useCartStore } from "@/stores/cartStore";
+import { useCurrency } from "@/hooks/useCurrency";
 import { Loader2, ArrowLeft, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 
@@ -12,6 +13,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState<ShopifyProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const addItem = useCartStore(state => state.addItem);
+  const { formatPrice } = useCurrency();
 
   useEffect(() => {
     async function fetchProduct() {
@@ -109,7 +111,7 @@ const ProductDetail = () => {
             <h1 className="text-4xl font-bold mb-4">{node.title}</h1>
             
             <div className="text-4xl font-bold text-primary mb-6">
-              {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
+              {formatPrice(price.amount)}
             </div>
 
             <div className="prose prose-sm mb-8">

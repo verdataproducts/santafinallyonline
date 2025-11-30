@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
+import { useCurrency } from "@/hooks/useCurrency";
 import { toast } from "sonner";
 
 export const CartDrawer = () => {
@@ -22,9 +23,13 @@ export const CartDrawer = () => {
     removeItem, 
     createCheckout 
   } = useCartStore();
+  const { formatPrice, convertPrice, currency } = useCurrency();
   
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = items.reduce((sum, item) => sum + (parseFloat(item.price.amount) * item.quantity), 0);
+  const totalPrice = items.reduce((sum, item) => {
+    const convertedPrice = parseFloat(convertPrice(item.price.amount));
+    return sum + (convertedPrice * item.quantity);
+  }, 0);
 
   const handleCheckout = async () => {
     try {
@@ -91,7 +96,7 @@ export const CartDrawer = () => {
                           {item.selectedOptions.map(option => option.value).join(' • ')}
                         </p>
                         <p className="font-semibold">
-                          {item.price.currencyCode} {parseFloat(item.price.amount).toFixed(2)}
+                          {formatPrice(item.price.amount)}
                         </p>
                       </div>
                       
@@ -134,7 +139,7 @@ export const CartDrawer = () => {
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold">Total</span>
                   <span className="text-xl font-bold">
-                    {items[0]?.price.currencyCode || '$'} {totalPrice.toFixed(2)}
+                    {currency} {totalPrice.toFixed(2)}
                   </span>
                 </div>
                 

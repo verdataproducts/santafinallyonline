@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import { ShopifyProduct } from "@/lib/shopify";
 import { Link } from "react-router-dom";
+import { useCurrency } from "@/hooks/useCurrency";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -13,6 +14,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
   const { node } = product;
   const image = node.images.edges[0]?.node;
   const price = node.priceRange.minVariantPrice;
+  const { formatPrice } = useCurrency();
 
   return (
     <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-2 hover:border-primary">
@@ -35,7 +37,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         </Link>
         <div className="flex items-center justify-between mb-3">
           <span className="text-2xl font-bold text-primary">
-            {price.currencyCode} {parseFloat(price.amount).toFixed(2)}
+            {formatPrice(price.amount)}
           </span>
         </div>
         <Button 
