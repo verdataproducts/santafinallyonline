@@ -158,8 +158,8 @@ const Index = () => {
   const websiteData = generateWebsiteStructuredData(baseUrl);
   const organizationData = generateOrganizationStructuredData();
 
-  // Google Search Console and Analytics IDs (set these in your environment)
-  const gscVerification = import.meta.env.VITE_GOOGLE_SEARCH_CONSOLE_VERIFICATION;
+  // Google Search Console and Analytics IDs
+  const gscVerification = "gaJMpcAJoGNVQ9KR5v6rY7N5IDABLN7hsDtDLX7xh64";
   const gaId = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
 
   return (
