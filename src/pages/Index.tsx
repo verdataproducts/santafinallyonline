@@ -15,6 +15,7 @@ import { SnowEffect } from "@/components/SnowEffect";
 import { ChristmasLights } from "@/components/ChristmasLights";
 import { ChristmasTree } from "@/components/ChristmasTree";
 import { SantaSleigh } from "@/components/SantaSleigh";
+import { SoundControl } from "@/components/SoundControl";
 
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -374,6 +375,9 @@ const Index = () => {
 
       {/* WhatsApp Support Button */}
       <WhatsAppButton />
+      
+      {/* Sound Control Button */}
+      <SoundControl />
     </div>
   );
 };

@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
+import { useSoundStore } from '@/stores/soundStore';
 
 export const SantaSleigh = () => {
   const [isFlying, setIsFlying] = useState(false);
+  const isMuted = useSoundStore((state) => state.isMuted);
 
   useEffect(() => {
     // Trigger sleigh animation every 45 seconds
     const triggerFlight = () => {
       setIsFlying(true);
       
-      // Play jingle bell sound
-      const audio = new Audio('https://cdn.pixabay.com/audio/2022/03/10/audio_4cf48dde4e.mp3');
-      audio.volume = 0.3;
-      audio.play().catch(() => {
-        // Silently fail if audio can't play (e.g., no user interaction yet)
-      });
+      // Play jingle bell sound only if not muted
+      if (!isMuted) {
+        const audio = new Audio('https://cdn.pixabay.com/audio/2022/03/10/audio_4cf48dde4e.mp3');
+        audio.volume = 0.3;
+        audio.play().catch(() => {
+          // Silently fail if audio can't play (e.g., no user interaction yet)
+        });
+      }
 
       // Reset after animation completes
       setTimeout(() => {
@@ -31,7 +35,7 @@ export const SantaSleigh = () => {
       clearTimeout(initialTimeout);
       clearInterval(interval);
     };
-  }, []);
+  }, [isMuted]);
 
   if (!isFlying) return null;
 
