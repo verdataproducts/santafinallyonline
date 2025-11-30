@@ -264,23 +264,24 @@ const Index = () => {
           </div>
 
           {/* Category Filters */}
-          <div className="mb-8">
+          <div className="mb-8 animate-fade-in">
             <h3 className="text-center text-sm font-semibold text-muted-foreground mb-4">Browse by Category</h3>
             <div className="flex flex-wrap justify-center gap-3">
-              {categories.map((category) => (
+              {categories.map((category, index) => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
                   className={`
                     px-6 py-3 rounded-full font-semibold transition-all duration-300
-                    flex items-center gap-2 border-2
+                    flex items-center gap-2 border-2 animate-scale-in
                     ${selectedCategory === category.id 
                       ? "bg-primary text-primary-foreground border-primary shadow-lg scale-105" 
-                      : "bg-card text-foreground border-border hover:border-primary hover:scale-105 hover:shadow-md"
+                      : "bg-card text-foreground border-border hover:border-primary hover:scale-110 hover:shadow-md"
                     }
                   `}
+                  style={{ animationDelay: `${index * 0.05}s` }}
                 >
-                  <span className="text-xl">{category.icon}</span>
+                  <span className="text-xl transition-transform hover:animate-wiggle">{category.icon}</span>
                   <span>{category.label}</span>
                 </button>
               ))}
@@ -288,23 +289,24 @@ const Index = () => {
           </div>
 
           {/* Age Range Filters */}
-          <div className="mb-12">
+          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
             <h3 className="text-center text-sm font-semibold text-muted-foreground mb-4">Browse by Age</h3>
             <div className="flex flex-wrap justify-center gap-3">
-              {ageRanges.map((age) => (
+              {ageRanges.map((age, index) => (
                 <button
                   key={age.id}
                   onClick={() => setSelectedAge(age.id)}
                   className={`
                     px-6 py-3 rounded-full font-semibold transition-all duration-300
-                    flex items-center gap-2 border-2
+                    flex items-center gap-2 border-2 animate-scale-in
                     ${selectedAge === age.id 
                       ? "bg-secondary text-secondary-foreground border-secondary shadow-lg scale-105" 
-                      : "bg-card text-foreground border-border hover:border-secondary hover:scale-105 hover:shadow-md"
+                      : "bg-card text-foreground border-border hover:border-secondary hover:scale-110 hover:shadow-md"
                     }
                   `}
+                  style={{ animationDelay: `${0.2 + index * 0.05}s` }}
                 >
-                  <span className="text-xl">{age.icon}</span>
+                  <span className="text-xl transition-transform hover:animate-bounce-fun">{age.icon}</span>
                   <span>{age.label}</span>
                 </button>
               ))}
@@ -366,21 +368,26 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-gradient-to-b from-muted/30 to-background">
+      <section className="py-16 bg-gradient-to-b from-muted/30 to-background relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-10 left-[5%] text-6xl opacity-5 animate-float pointer-events-none">🎪</div>
+        <div className="absolute bottom-10 right-[5%] text-6xl opacity-5 animate-wiggle pointer-events-none">🎨</div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl opacity-5 animate-bounce-fun pointer-events-none">⭐</div>
+        
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6 rounded-2xl bg-card hover:shadow-lg transition-shadow">
-              <div className="text-5xl mb-4 animate-bounce-fun">🎁</div>
+            <div className="text-center p-6 rounded-2xl bg-card hover:shadow-lg transition-all hover:scale-105 hover:-translate-y-1 duration-300 animate-fade-in">
+              <div className="text-5xl mb-4 animate-bounce-fun inline-block">🎁</div>
               <h3 className="text-xl font-bold mb-2">Free Gift Wrapping</h3>
               <p className="text-muted-foreground">Every order comes beautifully wrapped & ready to gift</p>
             </div>
-            <div className="text-center p-6 rounded-2xl bg-card hover:shadow-lg transition-shadow">
-              <div className="text-5xl mb-4 animate-float">🚀</div>
+            <div className="text-center p-6 rounded-2xl bg-card hover:shadow-lg transition-all hover:scale-105 hover:-translate-y-1 duration-300 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+              <div className="text-5xl mb-4 animate-float inline-block">🚀</div>
               <h3 className="text-xl font-bold mb-2">Lightning Fast Delivery</h3>
               <p className="text-muted-foreground">Get your toys delivered in record time</p>
             </div>
-            <div className="text-center p-6 rounded-2xl bg-card hover:shadow-lg transition-shadow">
-              <div className="text-5xl mb-4 animate-wiggle">⭐</div>
+            <div className="text-center p-6 rounded-2xl bg-card hover:shadow-lg transition-all hover:scale-105 hover:-translate-y-1 duration-300 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="text-5xl mb-4 animate-wiggle inline-block">⭐</div>
               <h3 className="text-xl font-bold mb-2">Premium Quality</h3>
               <p className="text-muted-foreground">Handpicked, safety-tested toys kids truly love</p>
             </div>

@@ -103,30 +103,35 @@ const AllToys = () => {
       </header>
 
       {/* Page Header */}
-      <section className="py-12">
+      <section className="py-12 relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute top-5 left-[10%] text-7xl opacity-10 animate-float pointer-events-none">🎯</div>
+        <div className="absolute top-10 right-[15%] text-6xl opacity-10 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🏆</div>
+        <div className="absolute bottom-5 left-[20%] text-8xl opacity-10 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1s' }}>⭐</div>
+        
         <div className="container mx-auto px-4">
           <Link to="/">
-            <Button variant="ghost" className="mb-6 gap-2">
+            <Button variant="ghost" className="mb-6 gap-2 hover:scale-105 transition-transform">
               <ArrowLeft className="w-4 h-4" />
               Back to Home
             </Button>
           </Link>
           
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 bg-accent/20 px-4 py-2 rounded-full mb-4">
-              <TrendingUp className="w-5 h-5 text-accent" />
+            <div className="inline-flex items-center gap-2 bg-accent/20 px-4 py-2 rounded-full mb-4 animate-scale-in">
+              <TrendingUp className="w-5 h-5 text-accent animate-wiggle" />
               <span className="text-sm font-semibold">Sorted by Popularity</span>
             </div>
-            <h1 className="text-5xl font-bold mb-4">
+            <h1 className="text-5xl font-bold mb-4 animate-fade-in">
               All Christmas Toys
               <br />
               <span className="bg-gradient-toy bg-clip-text text-transparent">Best Sellers Collection</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.1s' }}>
               Browse our complete collection of {products.length} amazing toys, sorted by what's flying off the shelves! 🎁✨
             </p>
             {!currencyLoading && currency !== 'KES' && (
-              <div className="flex items-center justify-center gap-2 mt-4">
+              <div className="flex items-center justify-center gap-2 mt-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                 <p className="text-sm text-muted-foreground">
                   Prices shown in {currency} (converted from KES)
                 </p>
