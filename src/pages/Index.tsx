@@ -5,6 +5,8 @@ import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ChristmasCountdown } from "@/components/ChristmasCountdown";
 import { ChristmasLights } from "@/components/ChristmasLights";
+import { SantaSleigh } from "@/components/SantaSleigh";
+import { SnowEffect } from "@/components/SnowEffect";
 import { useCurrency } from "@/hooks/useCurrency";
 import { useCartStore } from "@/stores/cartStore";
 import { useConfetti } from "@/hooks/useConfetti";
@@ -148,6 +150,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
+      {/* Snow Effect */}
+      <SnowEffect />
+      
+      {/* Santa Sleigh */}
+      <SantaSleigh />
+      
       {/* Christmas Lights */}
       <ChristmasLights />
       
