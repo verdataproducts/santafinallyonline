@@ -134,11 +134,24 @@
     }
   }
 
+  @keyframes sleigh-fly {
+    0% {
+      transform: translateX(0) translateY(0);
+    }
+    100% {
+      transform: translateX(calc(-100vw - 250px)) translateY(-30px);
+    }
+  }
+
   .animate-snowfall {
     animation: snowfall linear infinite;
   }
 
   .animate-twinkle {
     animation: twinkle 1.5s ease-in-out infinite;
+  }
+
+  .animate-sleigh-fly {
+    animation: sleigh-fly 8s linear forwards;
   }
 }
