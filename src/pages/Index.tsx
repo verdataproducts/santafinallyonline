@@ -173,22 +173,23 @@ const Index = () => {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b relative overflow-hidden">
         {/* Header decorative elements */}
-        <div className="absolute top-0 left-[5%] text-3xl opacity-20 animate-float pointer-events-none">✨</div>
-        <div className="absolute top-0 right-[5%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🌟</div>
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between gap-4 mb-4">
-            <div className="flex items-center gap-3">
-              <img src={santaLogo} alt="Santa's Finally Online Logo" className="w-12 h-12" />
+        <div className="hidden md:block absolute top-0 left-[5%] text-3xl opacity-20 animate-float pointer-events-none">✨</div>
+        <div className="hidden md:block absolute top-0 right-[5%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🌟</div>
+        <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 md:gap-4 mb-3 md:mb-4">
+            <div className="flex items-center gap-2 md:gap-3">
+              <img src={santaLogo} alt="Santa's Finally Online Logo" className="w-10 h-10 md:w-12 md:h-12" />
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent">Santa's Finally Online</h1>
-                <p className="text-sm text-muted-foreground">Christmas Magic Delivered to Your Door! 🎅🎄</p>
+                <h1 className="text-lg md:text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent">Santa's Finally Online</h1>
+                <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">Christmas Magic Delivered to Your Door! 🎅🎄</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-3 self-end sm:self-auto">
               <Link to="/all-toys">
-                <Button variant="outline" className="gap-2">
-                  <span>View All Toys</span>
-                  <Badge variant="secondary">{products.length}</Badge>
+                <Button variant="outline" className="gap-1 md:gap-2 text-xs md:text-sm h-8 md:h-10 px-3 md:px-4">
+                  <span className="hidden sm:inline">View All Toys</span>
+                  <span className="sm:hidden">All Toys</span>
+                  <Badge variant="secondary" className="text-xs">{products.length}</Badge>
                 </Button>
               </Link>
               <CartDrawer />
@@ -228,27 +229,27 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative py-12 md:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-rainbow opacity-5" />
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute top-10 left-[10%] text-8xl opacity-10 animate-wiggle">🎪</div>
-          <div className="absolute top-20 right-[15%] text-7xl opacity-10 animate-float" style={{ animationDelay: '0.5s' }}>🎡</div>
-          <div className="absolute bottom-10 left-[20%] text-9xl opacity-10 animate-bounce-fun" style={{ animationDelay: '1s' }}>🎠</div>
-          <div className="absolute bottom-20 right-[10%] text-8xl opacity-10 animate-float" style={{ animationDelay: '1.5s' }}>🎢</div>
+          <div className="hidden md:block absolute top-10 left-[10%] text-8xl opacity-10 animate-wiggle">🎪</div>
+          <div className="hidden md:block absolute top-20 right-[15%] text-7xl opacity-10 animate-float" style={{ animationDelay: '0.5s' }}>🎡</div>
+          <div className="hidden md:block absolute bottom-10 left-[20%] text-9xl opacity-10 animate-bounce-fun" style={{ animationDelay: '1s' }}>🎠</div>
+          <div className="hidden md:block absolute bottom-20 right-[10%] text-8xl opacity-10 animate-float" style={{ animationDelay: '1.5s' }}>🎢</div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-accent/20 px-4 py-2 rounded-full mb-6 animate-scale-in">
-              <Sparkles className="w-4 h-4 text-accent" />
-              <span className="text-sm font-semibold">Top Trending Toys 2025</span>
+            <div className="inline-flex items-center gap-2 bg-accent/20 px-3 md:px-4 py-1.5 md:py-2 rounded-full mb-4 md:mb-6 animate-scale-in">
+              <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-accent" />
+              <span className="text-xs md:text-sm font-semibold">Top Trending Toys 2025</span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight animate-fade-in">
               The Ultimate Toy Store
               <br />
               <span className="bg-gradient-toy bg-clip-text text-transparent">For Every Kid's Dream!</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <p className="text-base md:text-xl text-muted-foreground mb-6 md:mb-8 animate-fade-in px-4" style={{ animationDelay: '0.2s' }}>
               Discover 2025's hottest toys from LEGO to Nintendo Switch. Action figures, STEM kits, creative play & more. 
               Find the perfect gift that sparks joy and endless fun! 🎉✨
             </p>
@@ -274,16 +275,16 @@ const Index = () => {
           </div>
 
           {/* Category Filters */}
-          <div className="mb-8 animate-fade-in">
-            <h3 className="text-center text-sm font-semibold text-muted-foreground mb-4">Browse by Category</h3>
-            <div className="flex flex-wrap justify-center gap-3">
+          <div className="mb-6 md:mb-8 animate-fade-in">
+            <h3 className="text-center text-xs md:text-sm font-semibold text-muted-foreground mb-3 md:mb-4">Browse by Category</h3>
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3">
               {categories.map((category, index) => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
                   className={`
-                    px-6 py-3 rounded-full font-semibold transition-all duration-300
-                    flex items-center gap-2 border-2 animate-scale-in
+                    px-3 md:px-6 py-2 md:py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300
+                    flex items-center gap-1 md:gap-2 border-2 animate-scale-in
                     ${selectedCategory === category.id 
                       ? "bg-primary text-primary-foreground border-primary shadow-lg scale-105" 
                       : "bg-card text-foreground border-border hover:border-primary hover:scale-110 hover:shadow-md"
@@ -291,7 +292,7 @@ const Index = () => {
                   `}
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
-                  <span className="text-xl transition-transform hover:animate-wiggle">{category.icon}</span>
+                  <span className="text-base md:text-xl transition-transform hover:animate-wiggle">{category.icon}</span>
                   <span>{category.label}</span>
                 </button>
               ))}
@@ -299,16 +300,16 @@ const Index = () => {
           </div>
 
           {/* Age Range Filters */}
-          <div className="mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h3 className="text-center text-sm font-semibold text-muted-foreground mb-4">Browse by Age</h3>
-            <div className="flex flex-wrap justify-center gap-3">
+          <div className="mb-8 md:mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <h3 className="text-center text-xs md:text-sm font-semibold text-muted-foreground mb-3 md:mb-4">Browse by Age</h3>
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3">
               {ageRanges.map((age, index) => (
                 <button
                   key={age.id}
                   onClick={() => setSelectedAge(age.id)}
                   className={`
-                    px-6 py-3 rounded-full font-semibold transition-all duration-300
-                    flex items-center gap-2 border-2 animate-scale-in
+                    px-3 md:px-6 py-2 md:py-3 rounded-full text-xs md:text-sm font-semibold transition-all duration-300
+                    flex items-center gap-1 md:gap-2 border-2 animate-scale-in
                     ${selectedAge === age.id 
                       ? "bg-secondary text-secondary-foreground border-secondary shadow-lg scale-105" 
                       : "bg-card text-foreground border-border hover:border-secondary hover:scale-110 hover:shadow-md"
@@ -316,7 +317,7 @@ const Index = () => {
                   `}
                   style={{ animationDelay: `${0.2 + index * 0.05}s` }}
                 >
-                  <span className="text-xl transition-transform hover:animate-bounce-fun">{age.icon}</span>
+                  <span className="text-base md:text-xl transition-transform hover:animate-bounce-fun">{age.icon}</span>
                   <span>{age.label}</span>
                 </button>
               ))}

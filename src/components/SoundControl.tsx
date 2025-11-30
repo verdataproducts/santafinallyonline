@@ -19,13 +19,13 @@ export const SoundControl = () => {
       onClick={handleToggle}
       size="icon"
       variant="secondary"
-      className="fixed bottom-24 right-6 z-50 h-14 w-14 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 border-2 border-border"
+      className="fixed bottom-20 right-4 md:bottom-24 md:right-6 z-50 h-12 w-12 md:h-14 md:w-14 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 border-2 border-border"
       aria-label={isMuted ? 'Unmute sound effects' : 'Mute sound effects'}
     >
       {isMuted ? (
-        <VolumeX className="h-6 w-6" />
+        <VolumeX className="h-5 w-5 md:h-6 md:w-6" />
       ) : (
-        <Volume2 className="h-6 w-6" />
+        <Volume2 className="h-5 w-5 md:h-6 md:w-6" />
       )}
     </Button>
   );
