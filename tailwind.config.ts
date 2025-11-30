@@ -94,6 +94,16 @@ export default {
             transform: "rotate(3deg)",
           },
         },
+        "twinkle": {
+          "0%, 100%": {
+            opacity: "1",
+            transform: "scale(1)",
+          },
+          "50%": {
+            opacity: "0.3",
+            transform: "scale(0.8)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -101,6 +111,7 @@ export default {
         "float": "float 3s ease-in-out infinite",
         "bounce-fun": "bounce-fun 1s ease-in-out infinite",
         "wiggle": "wiggle 0.5s ease-in-out infinite",
+        "twinkle": "twinkle 1.5s ease-in-out infinite",
       },
       backgroundImage: {
         "gradient-toy": "var(--gradient-toy)",
