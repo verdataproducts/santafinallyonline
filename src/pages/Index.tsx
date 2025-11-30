@@ -11,6 +11,9 @@ import { toast } from "sonner";
 import santaLogo from "@/assets/santa-logo.png";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { SnowEffect } from "@/components/SnowEffect";
+import { ChristmasLights } from "@/components/ChristmasLights";
+import { ChristmasTree } from "@/components/ChristmasTree";
 
 const Index = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
@@ -143,7 +146,10 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background">
+    <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
+      <SnowEffect />
+      <ChristmasLights />
+      
       {/* Christmas Countdown Banner */}
       <ChristmasCountdown />
       
@@ -196,18 +202,23 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-festive opacity-10" />
+        <ChristmasTree className="absolute top-8 left-8 opacity-60 animate-fade-in" />
+        <ChristmasTree className="absolute top-8 right-8 opacity-60 animate-fade-in" style={{ animationDelay: '0.3s' }} />
+        <ChristmasTree className="absolute bottom-8 left-1/4 opacity-40 animate-fade-in" style={{ animationDelay: '0.6s' }} />
+        <ChristmasTree className="absolute bottom-8 right-1/4 opacity-40 animate-fade-in" style={{ animationDelay: '0.9s' }} />
+        
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-accent/20 px-4 py-2 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 bg-accent/20 px-4 py-2 rounded-full mb-6 animate-scale-in">
               <Sparkles className="w-4 h-4 text-accent" />
               <span className="text-sm font-semibold">Best-Selling Toys 2025</span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in">
               Top Toys for the Holidays
               <br />
               <span className="text-primary">That Kids Really Want</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-muted-foreground mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               Shop 2025's best-selling toys from LEGO to Nintendo Switch. Featuring action figures, STEM kits, creative play, and more. 
               Find the perfect gift that will light up their face this Christmas.
             </p>
