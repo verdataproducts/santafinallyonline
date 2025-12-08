@@ -9,6 +9,10 @@ import { PageTransition } from "@/components/PageTransition";
 import Index from "./pages/Index";
 import AllToys from "./pages/AllToys";
 import ProductDetail from "./pages/ProductDetail";
+import Auth from "./pages/Auth";
+import Dashboard from "./pages/admin/Dashboard";
+import Products from "./pages/admin/Products";
+import Content from "./pages/admin/Content";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +26,10 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<PageTransition><Index /></PageTransition>} />
         <Route path="/all-toys" element={<PageTransition><AllToys /></PageTransition>} />
         <Route path="/product/:handle" element={<PageTransition><ProductDetail /></PageTransition>} />
+        <Route path="/auth" element={<PageTransition><Auth /></PageTransition>} />
+        <Route path="/admin" element={<PageTransition><Dashboard /></PageTransition>} />
+        <Route path="/admin/products" element={<PageTransition><Products /></PageTransition>} />
+        <Route path="/admin/content" element={<PageTransition><Content /></PageTransition>} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
