@@ -16,7 +16,7 @@ serve(async (req) => {
 
   try {
     const { action, data } = await req.json();
-    console.log(`Shopify Admin action: ${action}`, data);
+    console.log(`Shopify Admin action: ${action}`, JSON.stringify(data).substring(0, 500));
 
     if (!SHOPIFY_ACCESS_TOKEN) {
       throw new Error('SHOPIFY_ACCESS_TOKEN not configured');
@@ -37,7 +37,7 @@ serve(async (req) => {
           body: JSON.stringify({ product: data }),
         });
         result = await response.json();
-        console.log('Create product result:', result);
+        console.log('Create product result:', JSON.stringify(result).substring(0, 500));
         break;
 
       case 'update_product':
@@ -50,7 +50,7 @@ serve(async (req) => {
           body: JSON.stringify({ product: data }),
         });
         result = await response.json();
-        console.log('Update product result:', result);
+        console.log('Update product result:', JSON.stringify(result).substring(0, 500));
         break;
 
       case 'delete_product':
@@ -75,22 +75,33 @@ serve(async (req) => {
         break;
 
       case 'upload_image':
-        // Upload image to product
+        // Upload image to product - supports both URL and base64
+        const imagePayload: { src?: string; attachment?: string; alt?: string; position?: number } = {
+          alt: data.alt || '',
+        };
+        
+        if (data.attachment) {
+          // Base64 encoded image
+          imagePayload.attachment = data.attachment;
+        } else if (data.image_url) {
+          // URL-based image
+          imagePayload.src = data.image_url;
+        }
+        
+        if (data.position !== undefined) {
+          imagePayload.position = data.position;
+        }
+        
         response = await fetch(`${baseUrl}/products/${data.product_id}/images.json`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'X-Shopify-Access-Token': SHOPIFY_ACCESS_TOKEN,
           },
-          body: JSON.stringify({
-            image: {
-              src: data.image_url,
-              alt: data.alt || '',
-            },
-          }),
+          body: JSON.stringify({ image: imagePayload }),
         });
         result = await response.json();
-        console.log('Upload image result:', result);
+        console.log('Upload image result:', JSON.stringify(result).substring(0, 500));
         break;
 
       case 'delete_image':
@@ -104,13 +115,54 @@ serve(async (req) => {
         console.log('Delete image result:', result);
         break;
 
+      case 'get_product_images':
+        response = await fetch(`${baseUrl}/products/${data.product_id}/images.json`, {
+          method: 'GET',
+          headers: {
+            'X-Shopify-Access-Token': SHOPIFY_ACCESS_TOKEN,
+          },
+        });
+        result = await response.json();
+        break;
+
+      case 'update_product_metafields':
+        // Update product metafields (can be used for video URLs)
+        response = await fetch(`${baseUrl}/products/${data.product_id}/metafields.json`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Access-Token': SHOPIFY_ACCESS_TOKEN,
+          },
+          body: JSON.stringify({
+            metafield: {
+              namespace: data.namespace || 'custom',
+              key: data.key,
+              value: data.value,
+              type: data.type || 'single_line_text_field',
+            },
+          }),
+        });
+        result = await response.json();
+        console.log('Update metafield result:', JSON.stringify(result).substring(0, 500));
+        break;
+
+      case 'get_product_metafields':
+        response = await fetch(`${baseUrl}/products/${data.product_id}/metafields.json`, {
+          method: 'GET',
+          headers: {
+            'X-Shopify-Access-Token': SHOPIFY_ACCESS_TOKEN,
+          },
+        });
+        result = await response.json();
+        break;
+
       default:
         throw new Error(`Unknown action: ${action}`);
     }
 
     if (!response.ok && action !== 'delete_product' && action !== 'delete_image') {
       console.error('Shopify API error:', result);
-      throw new Error(result.errors || 'Shopify API error');
+      throw new Error(result.errors ? JSON.stringify(result.errors) : 'Shopify API error');
     }
 
     return new Response(JSON.stringify(result), {
