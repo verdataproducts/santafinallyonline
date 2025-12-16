@@ -12,7 +12,7 @@ import { SEO } from "@/components/SEO";
 import { GoogleSearchConsole } from "@/components/GoogleSearchConsole";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { generateWebsiteStructuredData, generateOrganizationStructuredData } from "@/utils/structuredData";
-import { useCurrency } from "@/hooks/useCurrency";
+
 import { useCartStore } from "@/stores/cartStore";
 import { useConfetti } from "@/hooks/useConfetti";
 import { Loader2, Sparkles, Search, X } from "lucide-react";
@@ -29,7 +29,6 @@ const Index = () => {
   const [selectedAge, setSelectedAge] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const addItem = useCartStore(state => state.addItem);
-  const { formatPrice, currency, loading: currencyLoading } = useCurrency();
   const { fireworksBurst } = useConfetti();
 
   const categories = [
@@ -235,16 +234,6 @@ const Index = () => {
               >
                 <X className="w-5 h-5" />
               </button>
-            )}
-            {!currencyLoading && currency !== 'KES' && (
-              <div className="flex items-center justify-center gap-2 mt-2">
-                <p className="text-xs text-muted-foreground">
-                  Prices shown in {currency} (converted from KES)
-                </p>
-                <Badge variant="secondary" className="text-xs px-2 py-0.5 gap-1">
-                  🌍 Auto-detected
-                </Badge>
-              </div>
             )}
           </div>
         </div>

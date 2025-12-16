@@ -10,7 +10,7 @@ import { ChristmasCountdown } from "@/components/ChristmasCountdown";
 import { ChristmasLights } from "@/components/ChristmasLights";
 import { SantaSleigh } from "@/components/SantaSleigh";
 import { SnowEffect } from "@/components/SnowEffect";
-import { useCurrency } from "@/hooks/useCurrency";
+
 import { useCartStore } from "@/stores/cartStore";
 import { useConfetti } from "@/hooks/useConfetti";
 import { Loader2, ArrowLeft, TrendingUp } from "lucide-react";
@@ -23,7 +23,6 @@ const AllToys = () => {
   const [products, setProducts] = useState<ShopifyProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const addItem = useCartStore(state => state.addItem);
-  const { formatPrice, currency, loading: currencyLoading } = useCurrency();
   const { fireworksBurst } = useConfetti();
 
   useEffect(() => {
@@ -148,16 +147,6 @@ const AllToys = () => {
             <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.1s' }}>
               Browse our complete collection of {products.length} amazing toys, sorted by what's flying off the shelves! 🎁✨
             </p>
-            {!currencyLoading && currency !== 'KES' && (
-              <div className="flex items-center justify-center gap-2 mt-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                <p className="text-sm text-muted-foreground">
-                  Prices shown in {currency} (converted from KES)
-                </p>
-                <Badge variant="secondary" className="text-xs px-2 py-0.5 gap-1">
-                  🌍 Auto-detected
-                </Badge>
-              </div>
-            )}
           </div>
         </div>
       </section>
