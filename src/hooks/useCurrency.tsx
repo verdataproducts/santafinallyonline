@@ -44,8 +44,16 @@ export const useCurrency = () => {
   };
 
   const formatPrice = (kesPrice: string | number): string => {
-    const converted = convertPrice(kesPrice);
-    return `${currencyData.currency} ${converted}`;
+    const price = typeof kesPrice === 'string' ? parseFloat(kesPrice) : kesPrice;
+    const converted = price * currencyData.rate;
+    
+    // Use Intl.NumberFormat for proper currency formatting with symbols
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currencyData.currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(converted);
   };
 
   return {
