@@ -1,66 +1,26 @@
-import { useEffect, useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
-
-interface CurrencyData {
-  currency: string;
-  rate: number;
-  countryCode: string;
-  country: string;
-}
-
+// Simple USD currency formatting - no auto-detection
 export const useCurrency = () => {
-  const [currencyData, setCurrencyData] = useState<CurrencyData>({
-    currency: 'KES',
-    rate: 1,
-    countryCode: 'KE',
-    country: 'Kenya'
-  });
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchCurrency = async () => {
-      try {
-        const { data, error } = await supabase.functions.invoke('currency-converter');
-        
-        if (error) {
-          console.error('Error fetching currency:', error);
-        } else if (data) {
-          setCurrencyData(data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch currency data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCurrency();
-  }, []);
-
-  const convertPrice = (kesPrice: string | number): string => {
-    const price = typeof kesPrice === 'string' ? parseFloat(kesPrice) : kesPrice;
-    const converted = price * currencyData.rate;
-    return converted.toFixed(2);
-  };
-
-  const formatPrice = (kesPrice: string | number): string => {
-    const price = typeof kesPrice === 'string' ? parseFloat(kesPrice) : kesPrice;
-    const converted = price * currencyData.rate;
+  const formatPrice = (price: string | number): string => {
+    const numPrice = typeof price === 'string' ? parseFloat(price) : price;
     
-    // Use Intl.NumberFormat for proper currency formatting with symbols
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: currencyData.currency,
+      currency: 'USD',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    }).format(converted);
+    }).format(numPrice);
+  };
+
+  const convertPrice = (price: string | number): string => {
+    const numPrice = typeof price === 'string' ? parseFloat(price) : price;
+    return numPrice.toFixed(2);
   };
 
   return {
-    currency: currencyData.currency,
-    rate: currencyData.rate,
-    country: currencyData.country,
-    loading,
+    currency: 'USD',
+    rate: 1,
+    country: 'United States',
+    loading: false,
     convertPrice,
     formatPrice
   };
