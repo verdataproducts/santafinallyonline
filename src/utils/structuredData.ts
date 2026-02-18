@@ -35,7 +35,7 @@ export const generateWebsiteStructuredData = (baseUrl: string) => {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "ToyVault",
-    "description": "The ultimate online toy store with trending toys for 2025",
+    "description": "The ultimate online toy store with trending toys for 2026",
     "url": baseUrl,
     "potentialAction": {
       "@type": "SearchAction",
