@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getProducts, ShopifyProduct } from "@/lib/shopify";
+import { getProducts, Product } from "@/lib/products";
 import { ProductCard } from "@/components/ProductCard";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -11,7 +11,7 @@ import { generateWebsiteStructuredData, generateOrganizationStructuredData } fro
 
 import { useCartStore } from "@/stores/cartStore";
 import { useConfetti } from "@/hooks/useConfetti";
-import { Loader2, Search, X, Zap, Rocket, Shield, Tag } from "lucide-react";
+import { Search, X, Zap, Rocket, Shield, Tag } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -20,8 +20,7 @@ import { motion } from "framer-motion";
 import toyvaultLogo from "@/assets/toyvault-logo.png";
 
 const Index = () => {
-  const [products, setProducts] = useState<ShopifyProduct[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedAge, setSelectedAge] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -47,67 +46,23 @@ const Index = () => {
     { id: "teen", label: "Teens", icon: "🧑" },
   ];
 
-  const categorizeProduct = (title: string): string[] => {
-    const lowerTitle = title.toLowerCase();
-    const cats: string[] = ["all"];
-    if (lowerTitle.includes("lego") || lowerTitle.includes("building") || lowerTitle.includes("magna") || lowerTitle.includes("blocks") || lowerTitle.includes("tiles")) cats.push("lego");
-    if (lowerTitle.includes("doll") || lowerTitle.includes("plush") || lowerTitle.includes("barbie") || lowerTitle.includes("baby alive") || lowerTitle.includes("squishmallow")) cats.push("dolls");
-    if (lowerTitle.includes("spider") || lowerTitle.includes("venom") || lowerTitle.includes("action") || lowerTitle.includes("figure")) cats.push("action");
-    if (lowerTitle.includes("game") || lowerTitle.includes("puzzle") || lowerTitle.includes("connect") || lowerTitle.includes("pigeon") || lowerTitle.includes("kanoodle") || lowerTitle.includes("nintendo")) cats.push("games");
-    if (lowerTitle.includes("smart") || lowerTitle.includes("tablet") || lowerTitle.includes("learning") || lowerTitle.includes("educational") || lowerTitle.includes("stem")) cats.push("stem");
-    if (lowerTitle.includes("play-doh") || lowerTitle.includes("slime") || lowerTitle.includes("craft") || lowerTitle.includes("fashion") || lowerTitle.includes("design") || lowerTitle.includes("art")) cats.push("arts");
-    return cats;
-  };
-
-  const getProductAgeRanges = (title: string): string[] => {
-    const lowerTitle = title.toLowerCase();
-    const ages: string[] = ["all"];
-    if (lowerTitle.includes("baby") || lowerTitle.includes("toddler") || lowerTitle.includes("fisher-price")) ages.push("0-2");
-    if (lowerTitle.includes("play-doh") || lowerTitle.includes("melissa") || lowerTitle.includes("puzzle") || lowerTitle.includes("plush")) ages.push("3-5");
-    if (lowerTitle.includes("lego") || lowerTitle.includes("barbie") || lowerTitle.includes("hot wheels") || lowerTitle.includes("connect") || lowerTitle.includes("magna")) ages.push("6-8");
-    if (lowerTitle.includes("lol surprise") || lowerTitle.includes("nerf") || lowerTitle.includes("fashion") || lowerTitle.includes("squishmallow")) ages.push("9-12");
-    if (lowerTitle.includes("nintendo") || lowerTitle.includes("exploding") || lowerTitle.includes("kanoodle")) ages.push("teen");
-    return ages;
-  };
-
   const filteredProducts = products.filter(product => {
-    const matchesCategory = selectedCategory === "all" || categorizeProduct(product.node.title).includes(selectedCategory);
-    const matchesAge = selectedAge === "all" || getProductAgeRanges(product.node.title).includes(selectedAge);
+    const matchesCategory = selectedCategory === "all" || product.category.includes(selectedCategory);
+    const matchesAge = selectedAge === "all" || product.ageRange.includes(selectedAge);
     const matchesSearch = searchQuery === "" || 
-      product.node.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.node.description.toLowerCase().includes(searchQuery.toLowerCase());
+      product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesAge && matchesSearch;
   });
 
   useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const data = await getProducts(20);
-        setProducts(data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        toast.error('Failed to load products');
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProducts();
+    setProducts(getProducts());
   }, []);
 
-  const handleAddToCart = (product: ShopifyProduct) => {
-    const variant = product.node.variants.edges[0]?.node;
-    if (!variant) return;
-    const cartItem = {
-      product,
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions || []
-    };
-    addItem(cartItem);
+  const handleAddToCart = (product: Product) => {
+    addItem({ product, quantity: 1 });
     fireworksBurst();
-    toast.success(`Added ${product.node.title} to cart!`, { position: 'top-center' });
+    toast.success(`Added ${product.title} to cart!`, { position: 'top-center' });
   };
 
   const baseUrl = window.location.origin;
@@ -322,7 +277,6 @@ const Index = () => {
 
       {/* Products Grid */}
       <main id="trending" className="py-16 relative overflow-hidden">
-        {/* Background decorative blobs */}
         <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-accent/5 blur-3xl pointer-events-none" />
         
@@ -398,11 +352,7 @@ const Index = () => {
             </div>
           </div>
 
-          {loading ? (
-            <div className="flex items-center justify-center py-20">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
-            </div>
-          ) : filteredProducts.length === 0 ? (
+          {filteredProducts.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-lg text-muted-foreground mb-4">
                 {products.length === 0 ? "No products found" : "No toys found matching your filters"}
@@ -425,7 +375,7 @@ const Index = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProducts.map((product, index) => (
                 <ProductCard
-                  key={product.node.id}
+                  key={product.id}
                   product={product}
                   onAddToCart={handleAddToCart}
                   index={index}
@@ -438,7 +388,6 @@ const Index = () => {
 
       {/* Features Section */}
       <section className="py-16 relative overflow-hidden">
-        {/* Background pattern */}
         <div className="absolute inset-0 bg-muted/30" />
         <div className="absolute inset-0 opacity-[0.02]" style={{
           backgroundImage: 'radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)',
