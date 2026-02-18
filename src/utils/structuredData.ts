@@ -20,12 +20,12 @@ export const generateProductStructuredData = (product: ShopifyProduct, baseUrl: 
       "availability": "https://schema.org/InStock",
       "seller": {
         "@type": "Organization",
-        "name": "Santa's Finally Online"
+        "name": "ToyVault"
       }
     },
     "brand": {
       "@type": "Brand",
-      "name": "Santa's Finally Online"
+      "name": "ToyVault"
     }
   };
 };
@@ -34,8 +34,8 @@ export const generateWebsiteStructuredData = (baseUrl: string) => {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Santa's Finally Online",
-    "description": "The ultimate Christmas toy store with trending toys for 2025",
+    "name": "ToyVault",
+    "description": "The ultimate online toy store with trending toys for 2025",
     "url": baseUrl,
     "potentialAction": {
       "@type": "SearchAction",
@@ -52,10 +52,9 @@ export const generateOrganizationStructuredData = () => {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Santa's Finally Online",
-    "description": "Premium Christmas toy store delivering joy and magic",
+    "name": "ToyVault",
+    "description": "Modern online toy store delivering the hottest toys fast",
     "url": "https://santasfinally.online",
-    "logo": "https://santasfinally.online/santa-logo.png",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+1-912-303-6921",

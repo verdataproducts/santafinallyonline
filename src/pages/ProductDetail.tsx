@@ -11,7 +11,6 @@ import { useCurrency } from "@/hooks/useCurrency";
 import { useConfetti } from "@/hooks/useConfetti";
 import { Loader2, ArrowLeft, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
-import { Badge } from "@/components/ui/badge";
 import {
   Carousel,
   CarouselContent,
@@ -26,7 +25,7 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const addItem = useCartStore(state => state.addItem);
-  const { formatPrice, currency, loading: currencyLoading } = useCurrency();
+  const { formatPrice } = useCurrency();
   const { fireworksBurst } = useConfetti();
 
   useEffect(() => {
@@ -115,10 +114,7 @@ const ProductDetail = () => {
       
       <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b relative overflow-hidden">
-        {/* Header decorative elements */}
-        <div className="hidden md:block absolute top-0 left-[5%] text-3xl opacity-20 animate-float pointer-events-none">🎁</div>
-        <div className="hidden md:block absolute top-0 right-[5%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>⭐</div>
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b">
         <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
@@ -131,12 +127,7 @@ const ProductDetail = () => {
       </header>
 
       {/* Product Detail */}
-      <main className="container mx-auto px-3 md:px-4 py-6 md:py-12 relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="hidden md:block absolute top-20 left-[5%] text-8xl opacity-5 animate-float pointer-events-none">🎁</div>
-        <div className="hidden md:block absolute top-40 right-[5%] text-7xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>⭐</div>
-        <div className="hidden md:block absolute bottom-20 left-[10%] text-9xl opacity-5 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1s' }}>🎪</div>
-        
+      <main className="container mx-auto px-3 md:px-4 py-6 md:py-12">
         <div className="grid md:grid-cols-2 gap-6 md:gap-12 max-w-6xl mx-auto">
           {/* Product Image Carousel */}
           <div className="space-y-4 animate-fade-in">
@@ -189,17 +180,12 @@ const ProductDetail = () => {
 
           {/* Product Info */}
           <article className="flex flex-col animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4 hover:scale-105 transition-transform inline-block">{node.title}</h1>
+            <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">{node.title}</h1>
             
             <div className="mb-4 md:mb-6 animate-scale-in" style={{ animationDelay: '0.3s' }}>
-              <div className="text-3xl md:text-4xl font-bold text-primary mb-2 hover:animate-wiggle">
+              <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
                 {formatPrice(price.amount)}
               </div>
-              {!currencyLoading && currency !== 'KES' && (
-                <Badge variant="secondary" className="text-xs px-2 py-0.5 gap-1 inline-flex animate-fade-in">
-                  🌍 Auto-detected
-                </Badge>
-              )}
             </div>
 
             <div className="prose prose-sm mb-6 md:mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
@@ -212,7 +198,7 @@ const ProductDetail = () => {
                 size="lg"
                 className="w-full text-base md:text-lg py-5 md:py-6 hover:scale-105 transition-transform"
               >
-                <ShoppingCart className="mr-2 h-4 w-4 md:h-5 md:w-5 hover:animate-wiggle" />
+                <ShoppingCart className="mr-2 h-4 w-4 md:h-5 md:w-5" />
                 Add to Cart
               </Button>
             </div>
