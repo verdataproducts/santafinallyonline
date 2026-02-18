@@ -1,7 +1,9 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+const ALLOWED_ORIGIN = Deno.env.get("ALLOWED_ORIGIN") || "https://santafinallyonline.lovable.app";
+
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
@@ -58,6 +60,21 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
+
+    // Rate limiting: max 5 orders per IP per hour
+    const clientIp = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    const oneHourAgo = new Date(Date.now() - 3600000).toISOString();
+    const { count } = await supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .gte("created_at", oneHourAgo);
+
+    if (count !== null && count >= 50) {
+      return new Response(
+        JSON.stringify({ error: "Too many orders. Please try again later." }),
+        { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
     const { data, error } = await supabase.from("orders").insert({
       email: sanitize(email, 255),
