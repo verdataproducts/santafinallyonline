@@ -12,10 +12,11 @@ import {
 import { ShoppingCart, Minus, Plus, Trash2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { useCurrency } from "@/hooks/useCurrency";
-import { PayPalCheckoutButton } from "@/components/PayPalCheckoutButton";
+import { useNavigate } from "react-router-dom";
 
 export const CartDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const { 
     items, 
     updateQuantity, 
@@ -123,12 +124,16 @@ export const CartDrawer = () => {
                   </div>
                 </div>
                 
-                <PayPalCheckoutButton 
-                  totalPrice={totalPrice}
-                  onSuccess={() => {
+                <Button
+                  className="w-full"
+                  size="lg"
+                  onClick={() => {
                     setIsOpen(false);
+                    navigate("/checkout");
                   }}
-                />
+                >
+                  Proceed to Checkout
+                </Button>
               </div>
             </>
           )}
