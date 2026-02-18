@@ -1,33 +1,64 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useCartStore } from "@/stores/cartStore";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
-// PayPal sandbox Client ID for testing
-// Replace with your live PayPal Client ID when ready
-const PAYPAL_CLIENT_ID = "sb"; // "sb" = PayPal sandbox mode
+const PAYPAL_CLIENT_ID = "sb";
+
+export interface ShippingInfo {
+  fullName: string;
+  email: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+}
 
 interface PayPalCheckoutButtonProps {
   totalPrice: number;
-  onSuccess?: () => void;
+  shippingInfo?: ShippingInfo;
+  onSuccess?: (orderNumber: string) => void;
 }
 
-export function PayPalCheckoutButton({ totalPrice, onSuccess }: PayPalCheckoutButtonProps) {
+export function PayPalCheckoutButton({ totalPrice, shippingInfo, onSuccess }: PayPalCheckoutButtonProps) {
   const clearCart = useCartStore(state => state.clearCart);
   const items = useCartStore(state => state.items);
 
   if (totalPrice <= 0) return null;
 
+  const saveOrder = async (paypalOrderId?: string, paypalPayerId?: string) => {
+    if (!shippingInfo) return null;
+
+    try {
+      const { data, error } = await supabase.functions.invoke("create-order", {
+        body: {
+          ...shippingInfo,
+          items: items.map(item => ({
+            id: item.product.id,
+            title: item.product.title,
+            price: item.product.price,
+            quantity: item.quantity,
+          })),
+          totalAmount: totalPrice,
+          currency: "USD",
+          paypalOrderId,
+          paypalPayerId,
+        },
+      });
+
+      if (error) throw error;
+      return data?.orderNumber || null;
+    } catch (err) {
+      console.error("Failed to save order:", err);
+      return null;
+    }
+  };
+
   return (
-    <PayPalScriptProvider options={{ 
-      clientId: PAYPAL_CLIENT_ID,
-      currency: "USD",
-    }}>
+    <PayPalScriptProvider options={{ clientId: PAYPAL_CLIENT_ID, currency: "USD" }}>
       <PayPalButtons
-        style={{ 
-          layout: "vertical",
-          shape: "pill",
-          label: "checkout",
-        }}
+        style={{ layout: "vertical", shape: "pill", label: "checkout" }}
         createOrder={(_data, actions) => {
           return actions.order.create({
             intent: "CAPTURE",
@@ -36,18 +67,12 @@ export function PayPalCheckoutButton({ totalPrice, onSuccess }: PayPalCheckoutBu
                 currency_code: "USD",
                 value: totalPrice.toFixed(2),
                 breakdown: {
-                  item_total: {
-                    currency_code: "USD",
-                    value: totalPrice.toFixed(2),
-                  },
+                  item_total: { currency_code: "USD", value: totalPrice.toFixed(2) },
                 },
               },
               items: items.map(item => ({
                 name: item.product.title.substring(0, 127),
-                unit_amount: {
-                  currency_code: "USD",
-                  value: item.product.price.toFixed(2),
-                },
+                unit_amount: { currency_code: "USD", value: item.product.price.toFixed(2) },
                 quantity: item.quantity.toString(),
                 category: "PHYSICAL_GOODS" as const,
               })),
@@ -58,12 +83,18 @@ export function PayPalCheckoutButton({ totalPrice, onSuccess }: PayPalCheckoutBu
           try {
             const details = await actions.order?.capture();
             if (details?.status === "COMPLETED") {
-              toast.success("Payment successful! 🎉 Your order has been placed.", {
-                position: "top-center",
-                duration: 5000,
-              });
+              const orderNumber = await saveOrder(
+                details.id,
+                details.payer?.payer_id
+              );
+              toast.success(
+                orderNumber
+                  ? `Order ${orderNumber} placed successfully! 🎉`
+                  : "Payment successful! 🎉",
+                { position: "top-center", duration: 5000 }
+              );
               clearCart();
-              onSuccess?.();
+              onSuccess?.(orderNumber || "");
             }
           } catch (error) {
             console.error("Payment capture error:", error);

@@ -14,6 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
+      orders: {
+        Row: {
+          address: string
+          city: string
+          country: string
+          created_at: string
+          currency: string
+          email: string
+          full_name: string
+          id: string
+          items: Json
+          order_number: string
+          paypal_order_id: string | null
+          paypal_payer_id: string | null
+          state: string
+          status: string
+          total_amount: number
+          zip: string
+        }
+        Insert: {
+          address: string
+          city: string
+          country: string
+          created_at?: string
+          currency?: string
+          email: string
+          full_name: string
+          id?: string
+          items: Json
+          order_number?: string
+          paypal_order_id?: string | null
+          paypal_payer_id?: string | null
+          state: string
+          status?: string
+          total_amount: number
+          zip: string
+        }
+        Update: {
+          address?: string
+          city?: string
+          country?: string
+          created_at?: string
+          currency?: string
+          email?: string
+          full_name?: string
+          id?: string
+          items?: Json
+          order_number?: string
+          paypal_order_id?: string | null
+          paypal_payer_id?: string | null
+          state?: string
+          status?: string
+          total_amount?: number
+          zip?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string

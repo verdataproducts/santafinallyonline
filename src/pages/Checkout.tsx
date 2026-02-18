@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCartStore } from "@/stores/cartStore";
 import { useCurrency } from "@/hooks/useCurrency";
-import { PayPalCheckoutButton } from "@/components/PayPalCheckoutButton";
+import { PayPalCheckoutButton, type ShippingInfo } from "@/components/PayPalCheckoutButton";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -204,8 +204,9 @@ const Checkout = () => {
                   {shippingConfirmed ? (
                     <PayPalCheckoutButton
                       totalPrice={totalPrice}
-                      onSuccess={() => {
-                        navigate("/");
+                      shippingInfo={form as ShippingInfo}
+                      onSuccess={(orderNumber) => {
+                        navigate("/", { state: { orderNumber } });
                       }}
                     />
                   ) : (
