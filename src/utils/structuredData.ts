@@ -1,23 +1,19 @@
-import { ShopifyProduct } from "@/lib/shopify";
+import { Product } from "@/lib/products";
 
-export const generateProductStructuredData = (product: ShopifyProduct, baseUrl: string) => {
-  const { node } = product;
-  const image = node.images.edges[0]?.node;
-  const price = node.priceRange.minVariantPrice;
-  
+export const generateProductStructuredData = (product: Product, baseUrl: string) => {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": node.title,
-    "description": node.description,
-    "image": image?.url || "",
-    "sku": node.id,
+    "name": product.title,
+    "description": product.description,
+    "image": product.images[0] || "",
+    "sku": product.id,
     "offers": {
       "@type": "Offer",
-      "url": `${baseUrl}/product/${node.handle}`,
-      "priceCurrency": price.currencyCode,
-      "price": price.amount,
-      "availability": "https://schema.org/InStock",
+      "url": `${baseUrl}/product/${product.handle}`,
+      "priceCurrency": "USD",
+      "price": product.price.toFixed(2),
+      "availability": product.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
       "seller": {
         "@type": "Organization",
         "name": "ToyVault"

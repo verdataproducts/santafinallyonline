@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getProductsByPopularity, ShopifyProduct } from "@/lib/shopify";
+import { getProducts, Product } from "@/lib/products";
 import { SEO } from "@/components/SEO";
 import { generateBreadcrumbStructuredData } from "@/utils/structuredData";
 import { ProductCard } from "@/components/ProductCard";
@@ -9,47 +9,21 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 import { useCartStore } from "@/stores/cartStore";
 import { useConfetti } from "@/hooks/useConfetti";
-import { Loader2, ArrowLeft, TrendingUp } from "lucide-react";
+import { ArrowLeft, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import toyvaultLogo from "@/assets/toyvault-logo.png";
 
 const AllToys = () => {
-  const [products, setProducts] = useState<ShopifyProduct[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [products] = useState<Product[]>(getProducts());
   const addItem = useCartStore(state => state.addItem);
   const { fireworksBurst } = useConfetti();
 
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const data = await getProductsByPopularity(50);
-        setProducts(data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-        toast.error('Failed to load products');
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProducts();
-  }, []);
-
-  const handleAddToCart = (product: ShopifyProduct) => {
-    const variant = product.node.variants.edges[0]?.node;
-    if (!variant) return;
-    const cartItem = {
-      product,
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions || []
-    };
-    addItem(cartItem);
+  const handleAddToCart = (product: Product) => {
+    addItem({ product, quantity: 1 });
     fireworksBurst();
-    toast.success(`Added ${product.node.title} to cart!`, { position: 'top-center' });
+    toast.success(`Added ${product.title} to cart!`, { position: 'top-center' });
   };
 
   const baseUrl = window.location.origin;
@@ -134,7 +108,7 @@ const AllToys = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Browse our complete collection of {products.length} trending toys, sorted by what's flying off the shelves! 🚀
+              Browse our complete collection of {products.length} trending toys! 🚀
             </motion.p>
           </div>
         </div>
@@ -145,11 +119,7 @@ const AllToys = () => {
         <div className="absolute top-1/2 right-0 w-64 h-64 rounded-full bg-secondary/5 blur-3xl pointer-events-none" />
         
         <div className="container mx-auto px-4">
-          {loading ? (
-            <div className="flex items-center justify-center py-20">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
-            </div>
-          ) : products.length === 0 ? (
+          {products.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-lg text-muted-foreground mb-4">No products found</p>
             </div>
@@ -157,7 +127,7 @@ const AllToys = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {products.map((product, index) => (
                 <ProductCard
-                  key={product.node.id}
+                  key={product.id}
                   product={product}
                   onAddToCart={handleAddToCart}
                   index={index}

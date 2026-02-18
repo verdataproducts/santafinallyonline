@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProducts, ShopifyProduct } from "@/lib/shopify";
+import { getProductByHandle, Product } from "@/lib/products";
 import { SEO } from "@/components/SEO";
 import { generateProductStructuredData, generateBreadcrumbStructuredData } from "@/utils/structuredData";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { useCartStore } from "@/stores/cartStore";
 import { useCurrency } from "@/hooks/useCurrency";
 import { useConfetti } from "@/hooks/useConfetti";
-import { Loader2, ArrowLeft, ShoppingCart } from "lucide-react";
+import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 import {
   Carousel,
@@ -21,58 +21,27 @@ import {
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
-  const [product, setProduct] = useState<ShopifyProduct | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [product, setProduct] = useState<Product | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const addItem = useCartStore(state => state.addItem);
   const { formatPrice } = useCurrency();
   const { fireworksBurst } = useConfetti();
 
   useEffect(() => {
-    async function fetchProduct() {
-      try {
-        const data = await getProducts(100);
-        const found = data.find(p => p.node.handle === handle);
-        setProduct(found || null);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-        toast.error('Failed to load product');
-      } finally {
-        setLoading(false);
-      }
+    if (handle) {
+      const found = getProductByHandle(handle);
+      setProduct(found || null);
     }
-    
-    fetchProduct();
   }, [handle]);
 
   const handleAddToCart = () => {
     if (!product) return;
-    const variant = product.node.variants.edges[0]?.node;
-    if (!variant) return;
-
-    const cartItem = {
-      product,
-      variantId: variant.id,
-      variantTitle: variant.title,
-      price: variant.price,
-      quantity: 1,
-      selectedOptions: variant.selectedOptions || []
-    };
-    
-    addItem(cartItem);
+    addItem({ product, quantity: 1 });
     fireworksBurst();
-    toast.success(`Added ${product.node.title} to cart!`, {
+    toast.success(`Added ${product.title} to cart!`, {
       position: 'top-center',
     });
   };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
-  }
 
   if (!product) {
     return (
@@ -87,27 +56,22 @@ const ProductDetail = () => {
     );
   }
 
-  const { node } = product;
-  const images = node.images.edges;
-  const price = node.priceRange.minVariantPrice;
   const baseUrl = window.location.origin;
-  const productUrl = `${baseUrl}/product/${node.handle}`;
+  const productUrl = `${baseUrl}/product/${product.handle}`;
   
   const productStructuredData = generateProductStructuredData(product, baseUrl);
   const breadcrumbData = generateBreadcrumbStructuredData([
     { name: "Home", url: baseUrl },
-    { name: node.title, url: productUrl }
+    { name: product.title, url: productUrl }
   ]);
-  
-  const firstImage = images[0]?.node;
 
   return (
     <>
       <SEO 
-        title={`${node.title} - Buy Now`}
-        description={node.description.slice(0, 155)}
+        title={`${product.title} - Buy Now`}
+        description={product.description.slice(0, 155)}
         canonical={productUrl}
-        ogImage={firstImage?.url}
+        ogImage={product.images[0]}
         type="product"
         jsonLd={[productStructuredData, breadcrumbData]}
       />
@@ -133,14 +97,12 @@ const ProductDetail = () => {
           <div className="space-y-4 animate-fade-in">
             <Carousel className="w-full" opts={{ startIndex: selectedImageIndex }}>
               <CarouselContent>
-                {images.map((image, index) => (
+                {product.images.map((image, index) => (
                   <CarouselItem key={index}>
                     <div className="aspect-square rounded-2xl overflow-hidden bg-muted hover:shadow-2xl transition-all duration-300">
                       <img
-                        src={`${image.node.url}&width=800`}
-                        srcSet={`${image.node.url}&width=400 400w, ${image.node.url}&width=800 800w, ${image.node.url}&width=1200 1200w`}
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        alt={image.node.altText || `${node.title} - Image ${index + 1}`}
+                        src={image}
+                        alt={`${product.title} - Image ${index + 1}`}
                         loading={index === 0 ? "eager" : "lazy"}
                         decoding="async"
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
@@ -155,7 +117,7 @@ const ProductDetail = () => {
 
             {/* Thumbnail Navigation */}
             <div className="flex gap-2 overflow-x-auto pb-2">
-              {images.map((image, index) => (
+              {product.images.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImageIndex(index)}
@@ -167,7 +129,7 @@ const ProductDetail = () => {
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   <img
-                    src={`${image.node.url}&width=100`}
+                    src={image}
                     alt={`Thumbnail ${index + 1}`}
                     loading="lazy"
                     decoding="async"
@@ -180,16 +142,16 @@ const ProductDetail = () => {
 
           {/* Product Info */}
           <article className="flex flex-col animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">{node.title}</h1>
+            <h1 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">{product.title}</h1>
             
             <div className="mb-4 md:mb-6 animate-scale-in" style={{ animationDelay: '0.3s' }}>
               <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                {formatPrice(price.amount)}
+                {formatPrice(product.price)}
               </div>
             </div>
 
             <div className="prose prose-sm mb-6 md:mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <p className="text-base md:text-lg text-muted-foreground">{node.description}</p>
+              <p className="text-base md:text-lg text-muted-foreground">{product.description}</p>
             </div>
 
             <div className="mt-auto animate-scale-in" style={{ animationDelay: '0.5s' }}>

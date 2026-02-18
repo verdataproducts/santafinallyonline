@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Package, FileText, ShoppingCart, TrendingUp } from 'lucide-react';
-import { getProducts } from '@/lib/shopify';
+import { getProducts } from '@/lib/products';
 import { supabase } from '@/integrations/supabase/client';
 
 export default function AdminDashboard() {
-  const [productCount, setProductCount] = useState(0);
+  const [productCount] = useState(getProducts().length);
   const [contentCount, setContentCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,11 +14,6 @@ export default function AdminDashboard() {
     const fetchStats = async () => {
       setIsLoading(true);
       try {
-        // Get product count from Shopify
-        const products = await getProducts(100);
-        setProductCount(products.length);
-
-        // Get site content count
         const { count } = await supabase
           .from('site_content')
           .select('*', { count: 'exact', head: true });
@@ -38,7 +33,7 @@ export default function AdminDashboard() {
       title: 'Total Products',
       value: productCount,
       icon: Package,
-      description: 'Products in your Shopify store',
+      description: 'Products in your catalog',
     },
     {
       title: 'Site Content',
@@ -65,7 +60,7 @@ export default function AdminDashboard() {
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-display font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">Welcome to Santa's Admin Portal</p>
+          <p className="text-muted-foreground">Welcome to ToyVault Admin Portal</p>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -100,15 +95,15 @@ export default function AdminDashboard() {
                 href="/admin/products" 
                 className="block p-4 rounded-lg border hover:bg-muted transition-colors"
               >
-                <Package className="h-8 w-8 mb-2 text-christmas-red" />
+                <Package className="h-8 w-8 mb-2 text-primary" />
                 <h3 className="font-semibold">Manage Products</h3>
-                <p className="text-sm text-muted-foreground">Add, edit, or remove products</p>
+                <p className="text-sm text-muted-foreground">View product catalog</p>
               </a>
               <a 
                 href="/admin/content" 
                 className="block p-4 rounded-lg border hover:bg-muted transition-colors"
               >
-                <FileText className="h-8 w-8 mb-2 text-christmas-gold" />
+                <FileText className="h-8 w-8 mb-2 text-accent" />
                 <h3 className="font-semibold">Site Content</h3>
                 <p className="text-sm text-muted-foreground">Update banners and announcements</p>
               </a>
@@ -116,7 +111,7 @@ export default function AdminDashboard() {
                 href="/" 
                 className="block p-4 rounded-lg border hover:bg-muted transition-colors"
               >
-                <ShoppingCart className="h-8 w-8 mb-2 text-christmas-green" />
+                <ShoppingCart className="h-8 w-8 mb-2 text-secondary" />
                 <h3 className="font-semibold">View Store</h3>
                 <p className="text-sm text-muted-foreground">See your live storefront</p>
               </a>
