@@ -3,11 +3,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
-const PAYPAL_CLIENT_ID = import.meta.env.VITE_PAYPAL_CLIENT_ID || "sb";
-
-if (import.meta.env.DEV && (!import.meta.env.VITE_PAYPAL_CLIENT_ID || import.meta.env.VITE_PAYPAL_CLIENT_ID === "sb")) {
-  console.warn("Using sandbox PayPal credentials. Set VITE_PAYPAL_CLIENT_ID for production.");
-}
+const PAYPAL_CLIENT_ID = "AVjsE0o24_dJT779YiN6CsG8k-8EmVl_jw0DlwVN_zQ4MoE_KM51iXMN8LYymAK_e8F6Y8KoiABYfXrE";
 
 export interface ShippingInfo {
   fullName: string;
