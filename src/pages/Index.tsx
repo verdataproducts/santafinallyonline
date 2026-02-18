@@ -188,37 +188,47 @@ const Index = () => {
           <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full bg-accent/10 blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-secondary/8 blur-3xl animate-float" style={{ animationDelay: '3s' }} />
           
-          {/* Geometric shapes */}
+          {/* Floating brand badges */}
           <motion.div 
-            className="absolute top-16 right-[15%] w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          />
+            className="absolute top-16 right-[15%] px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-bold text-primary/60 select-none"
+            animate={{ y: [-10, 10, -10], rotate: [0, 3, -3, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >🧱 LEGO</motion.div>
           <motion.div 
-            className="absolute bottom-20 left-[10%] w-12 h-12 rounded-full bg-accent/15 border border-accent/20"
-            animate={{ y: [-20, 20, -20] }}
+            className="absolute bottom-20 left-[10%] px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-sm font-bold text-accent/60 select-none"
+            animate={{ y: [10, -10, 10], rotate: [0, -2, 2, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          />
+          >🎮 PlayStation</motion.div>
           <motion.div 
-            className="absolute top-1/3 left-[8%] w-8 h-8 rounded-lg bg-secondary/15 border border-secondary/20"
-            animate={{ rotate: -360, scale: [1, 1.2, 1] }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          />
+            className="absolute top-1/3 left-[8%] px-3 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-xs font-bold text-secondary/60 select-none"
+            animate={{ y: [-15, 15, -15], x: [-5, 5, -5] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          >🏎️ Hot Wheels</motion.div>
           <motion.div 
-            className="absolute bottom-1/3 right-[8%] w-20 h-20 rounded-3xl bg-primary/8 border border-primary/15"
-            animate={{ rotate: 180, y: [-15, 15, -15] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          />
+            className="absolute bottom-1/3 right-[8%] px-4 py-2 rounded-full bg-primary/8 border border-primary/15 text-sm font-bold text-primary/50 select-none"
+            animate={{ y: [-12, 12, -12], rotate: [0, 4, -4, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          >🎯 Nerf</motion.div>
           <motion.div 
-            className="hidden md:block absolute top-[20%] right-[30%] w-6 h-6 rounded-full bg-accent/20"
-            animate={{ scale: [0.8, 1.3, 0.8], opacity: [0.3, 0.7, 0.3] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          />
+            className="hidden md:block absolute top-[20%] right-[30%] px-3 py-1.5 rounded-full bg-accent/15 border border-accent/20 text-xs font-bold text-accent/50 select-none"
+            animate={{ scale: [0.9, 1.1, 0.9], y: [-8, 8, -8] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+          >🕹️ Nintendo</motion.div>
           <motion.div 
-            className="hidden md:block absolute bottom-[25%] left-[25%] w-10 h-10 rounded-xl bg-secondary/12 border border-secondary/15"
-            animate={{ rotate: 90, x: [-10, 10, -10] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          />
+            className="hidden md:block absolute bottom-[25%] left-[25%] px-3 py-1.5 rounded-full bg-secondary/12 border border-secondary/15 text-xs font-bold text-secondary/50 select-none"
+            animate={{ y: [10, -10, 10], x: [5, -5, 5] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+          >👾 GTA VI</motion.div>
+          <motion.div 
+            className="hidden md:block absolute top-[60%] right-[22%] px-3 py-1.5 rounded-full bg-primary/10 border border-primary/15 text-xs font-bold text-primary/50 select-none"
+            animate={{ y: [-10, 10, -10], rotate: [0, -3, 3, 0] }}
+            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
+          >💗 Barbie</motion.div>
+          <motion.div 
+            className="hidden lg:block absolute top-[15%] left-[20%] px-3 py-1.5 rounded-full bg-accent/10 border border-accent/15 text-xs font-bold text-accent/50 select-none"
+            animate={{ y: [8, -12, 8], scale: [1, 1.05, 1] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          >🎲 Hasbro</motion.div>
           
           {/* Dotted grid pattern */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
