@@ -56,7 +56,7 @@ export function PayPalCheckoutButton({ totalPrice, shippingInfo, onSuccess }: Pa
   };
 
   return (
-    <PayPalScriptProvider options={{ clientId: PAYPAL_CLIENT_ID, currency: "USD" }}>
+    <PayPalScriptProvider options={{ clientId: PAYPAL_CLIENT_ID, currency: "USD", intent: "capture" }}>
       <PayPalButtons
         style={{ layout: "vertical", shape: "pill", label: "checkout" }}
         createOrder={(_data, actions) => {
