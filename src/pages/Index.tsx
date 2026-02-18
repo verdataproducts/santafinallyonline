@@ -218,7 +218,7 @@ const Index = () => {
             className="hidden md:block absolute bottom-[25%] left-[25%] px-3 py-1.5 rounded-full bg-secondary/12 border border-secondary/15 text-xs font-bold text-secondary/50 select-none"
             animate={{ y: [10, -10, 10], x: [5, -5, 5] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-          >👾 GTA VI</motion.div>
+          >🧸 Squishmallows</motion.div>
           <motion.div 
             className="hidden md:block absolute top-[60%] right-[22%] px-3 py-1.5 rounded-full bg-primary/10 border border-primary/15 text-xs font-bold text-primary/50 select-none"
             animate={{ y: [-10, 10, -10], rotate: [0, -3, 3, 0] }}
@@ -229,6 +229,31 @@ const Index = () => {
             animate={{ y: [8, -12, 8], scale: [1, 1.05, 1] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           >🎲 Hasbro</motion.div>
+          <motion.div 
+            className="hidden md:block absolute top-[45%] left-[5%] px-3 py-1.5 rounded-full bg-primary/10 border border-primary/15 text-xs font-bold text-primary/50 select-none"
+            animate={{ y: [12, -8, 12], rotate: [0, 2, -2, 0] }}
+            transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          >🦸 Marvel</motion.div>
+          <motion.div 
+            className="absolute top-[10%] left-[40%] px-3 py-1.5 rounded-full bg-accent/10 border border-accent/15 text-xs font-bold text-accent/50 select-none"
+            animate={{ y: [-8, 12, -8], scale: [1, 1.08, 1] }}
+            transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+          >⚡ Pokémon</motion.div>
+          <motion.div 
+            className="hidden lg:block absolute bottom-[15%] right-[30%] px-3 py-1.5 rounded-full bg-secondary/10 border border-secondary/15 text-xs font-bold text-secondary/50 select-none"
+            animate={{ y: [10, -12, 10], x: [-4, 4, -4] }}
+            transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+          >⚽ FC 26</motion.div>
+          <motion.div 
+            className="hidden lg:block absolute bottom-[10%] left-[35%] px-3 py-1.5 rounded-full bg-primary/8 border border-primary/12 text-xs font-bold text-primary/45 select-none"
+            animate={{ y: [-6, 10, -6], rotate: [0, -2, 2, 0] }}
+            transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+          >👶 Fisher-Price</motion.div>
+          <motion.div 
+            className="hidden lg:block absolute top-[70%] left-[15%] px-3 py-1.5 rounded-full bg-accent/8 border border-accent/12 text-xs font-bold text-accent/45 select-none"
+            animate={{ y: [8, -10, 8], scale: [0.95, 1.05, 0.95] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+          >🎮 GTA VI</motion.div>
           
           {/* Dotted grid pattern */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
