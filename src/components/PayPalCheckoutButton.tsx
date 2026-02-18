@@ -3,7 +3,11 @@ import { useCartStore } from "@/stores/cartStore";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
-const PAYPAL_CLIENT_ID = "sb";
+const PAYPAL_CLIENT_ID = import.meta.env.VITE_PAYPAL_CLIENT_ID || "sb";
+
+if (import.meta.env.DEV && (!import.meta.env.VITE_PAYPAL_CLIENT_ID || import.meta.env.VITE_PAYPAL_CLIENT_ID === "sb")) {
+  console.warn("Using sandbox PayPal credentials. Set VITE_PAYPAL_CLIENT_ID for production.");
+}
 
 export interface ShippingInfo {
   fullName: string;
@@ -50,7 +54,7 @@ export function PayPalCheckoutButton({ totalPrice, shippingInfo, onSuccess }: Pa
       if (error) throw error;
       return data?.orderNumber || null;
     } catch (err) {
-      console.error("Failed to save order:", err);
+      if (import.meta.env.DEV) console.error("Failed to save order:", err);
       return null;
     }
   };
@@ -97,12 +101,12 @@ export function PayPalCheckoutButton({ totalPrice, shippingInfo, onSuccess }: Pa
               onSuccess?.(orderNumber || "");
             }
           } catch (error) {
-            console.error("Payment capture error:", error);
+            if (import.meta.env.DEV) console.error("Payment capture error:", error);
             toast.error("Payment failed. Please try again.");
           }
         }}
         onError={(err) => {
-          console.error("PayPal error:", err);
+          if (import.meta.env.DEV) console.error("PayPal error:", err);
           toast.error("Something went wrong with PayPal. Please try again.");
         }}
         onCancel={() => {

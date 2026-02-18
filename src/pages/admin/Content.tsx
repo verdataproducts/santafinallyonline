@@ -61,7 +61,7 @@ export default function AdminContent() {
       if (error) throw error;
       setContents(data || []);
     } catch (error) {
-      console.error('Error fetching content:', error);
+      if (import.meta.env.DEV) console.error('Error fetching content:', error);
       toast({
         title: 'Error',
         description: 'Failed to load site content',
@@ -108,7 +108,7 @@ export default function AdminContent() {
       setFormData(initialFormData);
       fetchContents();
     } catch (error: any) {
-      console.error('Error creating content:', error);
+      if (import.meta.env.DEV) console.error('Error creating content:', error);
       toast({
         title: 'Error',
         description: error.message?.includes('unique') 
@@ -154,7 +154,7 @@ export default function AdminContent() {
       setFormData(initialFormData);
       fetchContents();
     } catch (error) {
-      console.error('Error updating content:', error);
+      if (import.meta.env.DEV) console.error('Error updating content:', error);
       toast({
         title: 'Error',
         description: 'Failed to update content',
@@ -185,7 +185,7 @@ export default function AdminContent() {
       setSelectedContent(null);
       fetchContents();
     } catch (error) {
-      console.error('Error deleting content:', error);
+      if (import.meta.env.DEV) console.error('Error deleting content:', error);
       toast({
         title: 'Error',
         description: 'Failed to delete content',
@@ -223,7 +223,7 @@ export default function AdminContent() {
       if (error) throw error;
       fetchContents();
     } catch (error) {
-      console.error('Error toggling status:', error);
+      if (import.meta.env.DEV) console.error('Error toggling status:', error);
     }
   };
 
