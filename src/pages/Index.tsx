@@ -143,72 +143,111 @@ const Index = () => {
           <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full bg-accent/10 blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-secondary/8 blur-3xl animate-float" style={{ animationDelay: '3s' }} />
           
-          {/* Floating brand badges */}
+          {/* Floating brand cubes */}
           <motion.div 
-            className="absolute top-16 right-[15%] px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-bold text-primary/60 select-none"
+            className="absolute top-16 right-[15%] w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-primary/10 border-2 border-primary/20 flex flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [-10, 10, -10], rotate: [0, 3, -3, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          >🧱 LEGO</motion.div>
+          >
+            <span className="text-3xl md:text-4xl">🧱</span>
+            <span className="text-[10px] md:text-xs font-bold text-primary/70 mt-1">LEGO</span>
+          </motion.div>
           <motion.div 
-            className="absolute bottom-20 left-[10%] px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-sm font-bold text-accent/60 select-none"
+            className="absolute bottom-20 left-[10%] w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-accent/10 border-2 border-accent/20 flex flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [10, -10, 10], rotate: [0, -2, 2, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          >🎮 PlayStation</motion.div>
+          >
+            <span className="text-3xl md:text-4xl">🎮</span>
+            <span className="text-[10px] md:text-xs font-bold text-accent/70 mt-1">PlayStation</span>
+          </motion.div>
           <motion.div 
-            className="absolute top-1/3 left-[8%] px-3 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-xs font-bold text-secondary/60 select-none"
+            className="absolute top-1/3 left-[8%] w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-secondary/10 border-2 border-secondary/20 flex flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [-15, 15, -15], x: [-5, 5, -5] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          >🏎️ Hot Wheels</motion.div>
+          >
+            <span className="text-2xl md:text-3xl">🏎️</span>
+            <span className="text-[9px] md:text-[10px] font-bold text-secondary/70 mt-1">Hot Wheels</span>
+          </motion.div>
           <motion.div 
-            className="absolute bottom-1/3 right-[8%] px-4 py-2 rounded-full bg-primary/8 border border-primary/15 text-sm font-bold text-primary/50 select-none"
+            className="absolute bottom-1/3 right-[8%] w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-primary/8 border-2 border-primary/15 flex flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [-12, 12, -12], rotate: [0, 4, -4, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          >🎯 Nerf</motion.div>
+          >
+            <span className="text-3xl md:text-4xl">🎯</span>
+            <span className="text-[10px] md:text-xs font-bold text-primary/60 mt-1">Nerf</span>
+          </motion.div>
           <motion.div 
-            className="hidden md:block absolute top-[20%] right-[30%] px-3 py-1.5 rounded-full bg-accent/15 border border-accent/20 text-xs font-bold text-accent/50 select-none"
+            className="hidden md:flex absolute top-[20%] right-[30%] w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-accent/15 border-2 border-accent/20 flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ scale: [0.9, 1.1, 0.9], y: [-8, 8, -8] }}
             transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-          >🕹️ Nintendo</motion.div>
+          >
+            <span className="text-3xl md:text-4xl">🕹️</span>
+            <span className="text-[10px] md:text-xs font-bold text-accent/60 mt-1">Nintendo</span>
+          </motion.div>
           <motion.div 
-            className="hidden md:block absolute bottom-[25%] left-[25%] px-3 py-1.5 rounded-full bg-secondary/12 border border-secondary/15 text-xs font-bold text-secondary/50 select-none"
+            className="hidden md:flex absolute bottom-[25%] left-[25%] w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-secondary/12 border-2 border-secondary/15 flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [10, -10, 10], x: [5, -5, 5] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-          >🧸 Squishmallows</motion.div>
+          >
+            <span className="text-3xl md:text-4xl">🧸</span>
+            <span className="text-[10px] md:text-xs font-bold text-secondary/60 mt-1">Squishmallows</span>
+          </motion.div>
           <motion.div 
-            className="hidden md:block absolute top-[60%] right-[22%] px-3 py-1.5 rounded-full bg-primary/10 border border-primary/15 text-xs font-bold text-primary/50 select-none"
+            className="hidden md:flex absolute top-[60%] right-[22%] w-18 h-18 md:w-22 md:h-22 rounded-2xl bg-primary/10 border-2 border-primary/15 flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [-10, 10, -10], rotate: [0, -3, 3, 0] }}
             transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-          >💗 Barbie</motion.div>
+          >
+            <span className="text-2xl md:text-3xl">💗</span>
+            <span className="text-[9px] md:text-[10px] font-bold text-primary/60 mt-1">Barbie</span>
+          </motion.div>
           <motion.div 
-            className="hidden lg:block absolute top-[15%] left-[20%] px-3 py-1.5 rounded-full bg-accent/10 border border-accent/15 text-xs font-bold text-accent/50 select-none"
+            className="hidden lg:flex absolute top-[15%] left-[20%] w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-accent/10 border-2 border-accent/15 flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [8, -12, 8], scale: [1, 1.05, 1] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          >🎲 Hasbro</motion.div>
+          >
+            <span className="text-3xl md:text-4xl">🎲</span>
+            <span className="text-[10px] md:text-xs font-bold text-accent/60 mt-1">Hasbro</span>
+          </motion.div>
           <motion.div 
-            className="hidden md:block absolute top-[45%] left-[5%] px-3 py-1.5 rounded-full bg-primary/10 border border-primary/15 text-xs font-bold text-primary/50 select-none"
+            className="hidden md:flex absolute top-[45%] left-[5%] w-18 h-18 md:w-22 md:h-22 rounded-2xl bg-primary/10 border-2 border-primary/15 flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [12, -8, 12], rotate: [0, 2, -2, 0] }}
             transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-          >🦸 Marvel</motion.div>
+          >
+            <span className="text-2xl md:text-3xl">🦸</span>
+            <span className="text-[9px] md:text-[10px] font-bold text-primary/60 mt-1">Marvel</span>
+          </motion.div>
           <motion.div 
-            className="absolute top-[10%] left-[40%] px-3 py-1.5 rounded-full bg-accent/10 border border-accent/15 text-xs font-bold text-accent/50 select-none"
+            className="absolute top-[10%] left-[40%] w-18 h-18 md:w-22 md:h-22 rounded-2xl bg-accent/10 border-2 border-accent/15 flex flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [-8, 12, -8], scale: [1, 1.08, 1] }}
             transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-          >⚡ Pokémon</motion.div>
+          >
+            <span className="text-2xl md:text-3xl">⚡</span>
+            <span className="text-[9px] md:text-[10px] font-bold text-accent/60 mt-1">Pokémon</span>
+          </motion.div>
           <motion.div 
-            className="hidden lg:block absolute bottom-[15%] right-[30%] px-3 py-1.5 rounded-full bg-secondary/10 border border-secondary/15 text-xs font-bold text-secondary/50 select-none"
+            className="hidden lg:flex absolute bottom-[15%] right-[30%] w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-secondary/10 border-2 border-secondary/15 flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [10, -12, 10], x: [-4, 4, -4] }}
             transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-          >⚽ FC 26</motion.div>
+          >
+            <span className="text-3xl md:text-4xl">⚽</span>
+            <span className="text-[10px] md:text-xs font-bold text-secondary/60 mt-1">FC 26</span>
+          </motion.div>
           <motion.div 
-            className="hidden lg:block absolute bottom-[10%] left-[35%] px-3 py-1.5 rounded-full bg-primary/8 border border-primary/12 text-xs font-bold text-primary/45 select-none"
+            className="hidden lg:flex absolute bottom-[10%] left-[35%] w-18 h-18 md:w-22 md:h-22 rounded-2xl bg-primary/8 border-2 border-primary/12 flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [-6, 10, -6], rotate: [0, -2, 2, 0] }}
             transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
-          >👶 Fisher-Price</motion.div>
+          >
+            <span className="text-2xl md:text-3xl">👶</span>
+            <span className="text-[9px] md:text-[10px] font-bold text-primary/55 mt-1">Fisher-Price</span>
+          </motion.div>
           <motion.div 
-            className="hidden lg:block absolute top-[70%] left-[15%] px-3 py-1.5 rounded-full bg-accent/8 border border-accent/12 text-xs font-bold text-accent/45 select-none"
+            className="hidden lg:flex absolute top-[70%] left-[15%] w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-accent/8 border-2 border-accent/12 flex-col items-center justify-center shadow-lg backdrop-blur-sm select-none"
             animate={{ y: [8, -10, 8], scale: [0.95, 1.05, 0.95] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
-          >🎮 GTA VI</motion.div>
+          >
+            <span className="text-3xl md:text-4xl">🎮</span>
+            <span className="text-[10px] md:text-xs font-bold text-accent/55 mt-1">GTA VI</span>
+          </motion.div>
           
           {/* Dotted grid pattern */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
