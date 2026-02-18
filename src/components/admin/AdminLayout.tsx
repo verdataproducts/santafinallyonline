@@ -6,6 +6,7 @@ import {
   LayoutDashboard, 
   Package, 
   FileText, 
+  ClipboardList,
   LogOut, 
   Home,
   Loader2,
@@ -21,6 +22,7 @@ interface AdminLayoutProps {
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/admin/orders', label: 'Orders', icon: ClipboardList },
   { href: '/admin/products', label: 'Products', icon: Package },
   { href: '/admin/content', label: 'Site Content', icon: FileText },
 ];
