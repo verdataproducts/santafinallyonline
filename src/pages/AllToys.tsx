@@ -6,16 +6,11 @@ import { generateBreadcrumbStructuredData } from "@/utils/structuredData";
 import { ProductCard } from "@/components/ProductCard";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { ChristmasCountdown } from "@/components/ChristmasCountdown";
-import { ChristmasLights } from "@/components/ChristmasLights";
-import { SantaSleigh } from "@/components/SantaSleigh";
-import { SnowEffect } from "@/components/SnowEffect";
 
 import { useCartStore } from "@/stores/cartStore";
 import { useConfetti } from "@/hooks/useConfetti";
 import { Loader2, ArrowLeft, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
-import santaLogo from "@/assets/santa-logo.png";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -77,43 +72,25 @@ const AllToys = () => {
         jsonLd={breadcrumbData}
       />
       
-      <div className="min-h-screen bg-gradient-to-b from-background via-muted/20 to-background relative">
-      {/* Christmas Countdown */}
-      <ChristmasCountdown />
-      
-      {/* Christmas Lights */}
-      <ChristmasLights />
-      
-      {/* Snow Effect */}
-      <SnowEffect />
-      
-      {/* Santa Sleigh */}
-      <SantaSleigh />
-      
-      {/* Floating Christmas decorations */}
-      <div className="fixed top-20 left-10 text-6xl animate-float opacity-30 pointer-events-none">🎄</div>
-      <div className="fixed top-40 right-20 text-5xl animate-float opacity-30 pointer-events-none" style={{ animationDelay: '1s' }}>⛄</div>
-      <div className="fixed bottom-40 left-20 text-4xl animate-bounce-fun opacity-30 pointer-events-none" style={{ animationDelay: '2s' }}>🎁</div>
-      <div className="fixed bottom-20 right-10 text-5xl animate-float opacity-30 pointer-events-none" style={{ animationDelay: '1.5s' }}>🎅</div>
+      <div className="min-h-screen bg-background relative">
       
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b relative overflow-hidden">
-        {/* Header decorative elements */}
-        <div className="hidden md:block absolute top-0 left-[5%] text-3xl opacity-20 animate-float pointer-events-none">🎪</div>
-        <div className="hidden md:block absolute top-0 right-[5%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🏆</div>
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b">
         <div className="container mx-auto px-3 md:px-4 py-3 md:py-4">
           <div className="flex items-center justify-between gap-3 md:gap-4">
             <div className="flex items-center gap-2 md:gap-3">
               <Link to="/">
-                <img src={santaLogo} alt="Santa's Finally Online - Christmas Toy Store Logo" className="w-10 h-10 md:w-12 md:h-12 cursor-pointer hover:scale-110 transition-transform" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-toy flex items-center justify-center text-xl md:text-2xl font-bold text-primary-foreground cursor-pointer hover:scale-110 transition-transform">
+                  TV
+                </div>
               </Link>
               <div>
                 <Link to="/">
                   <div className="text-lg md:text-2xl font-bold bg-gradient-toy bg-clip-text text-transparent hover:scale-105 transition-transform cursor-pointer">
-                    Santa's Finally Online
+                    ToyVault
                   </div>
                 </Link>
-                <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">Christmas Magic Delivered to Your Door! 🎅🎄</p>
+                <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">The Hottest Toys, Delivered Fast ⚡</p>
               </div>
             </div>
             <CartDrawer />
@@ -122,12 +99,7 @@ const AllToys = () => {
       </header>
 
       {/* Page Header */}
-      <section className="py-8 md:py-12 relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="hidden md:block absolute top-5 left-[10%] text-7xl opacity-10 animate-float pointer-events-none">🎯</div>
-        <div className="hidden md:block absolute top-10 right-[15%] text-6xl opacity-10 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🏆</div>
-        <div className="hidden md:block absolute bottom-5 left-[20%] text-8xl opacity-10 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1s' }}>⭐</div>
-        
+      <section className="py-8 md:py-12">
         <div className="container mx-auto px-3 md:px-4">
           <Link to="/">
             <Button variant="ghost" className="mb-4 md:mb-6 gap-2 hover:scale-105 transition-transform text-sm md:text-base h-8 md:h-10">
@@ -137,30 +109,22 @@ const AllToys = () => {
           </Link>
           
           <div className="text-center mb-6 md:mb-8">
-            <div className="inline-flex items-center gap-2 bg-accent/20 px-3 md:px-4 py-1.5 md:py-2 rounded-full mb-3 md:mb-4 animate-scale-in">
-              <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-accent animate-wiggle" />
+            <div className="inline-flex items-center gap-2 bg-accent/10 px-3 md:px-4 py-1.5 md:py-2 rounded-full mb-3 md:mb-4 animate-scale-in">
+              <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-accent" />
               <span className="text-xs md:text-sm font-semibold">Sorted by Popularity</span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 animate-fade-in">
-              All Best-Selling Toys 2025 - Complete Collection
+              All Best-Selling Toys 2025
             </h1>
             <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.1s' }}>
-              Browse our complete collection of {products.length} amazing toys, sorted by what's flying off the shelves! 🎁✨
+              Browse our complete collection of {products.length} trending toys, sorted by what's flying off the shelves! 🚀
             </p>
           </div>
         </div>
       </section>
 
       {/* Products Grid */}
-      <main className="pb-16 relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute top-10 left-[5%] text-9xl opacity-5 animate-float pointer-events-none">🎁</div>
-        <div className="absolute top-40 right-[5%] text-8xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.5s' }}>🎯</div>
-        <div className="absolute bottom-40 left-[10%] text-7xl opacity-5 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1s' }}>⭐</div>
-        <div className="absolute bottom-10 right-[15%] text-9xl opacity-5 animate-float pointer-events-none" style={{ animationDelay: '1.5s' }}>🎪</div>
-        <div className="absolute top-1/3 left-[50%] text-6xl opacity-5 animate-wiggle pointer-events-none" style={{ animationDelay: '0.8s' }}>🏆</div>
-        <div className="absolute bottom-1/3 right-[8%] text-8xl opacity-5 animate-bounce-fun pointer-events-none" style={{ animationDelay: '1.2s' }}>🎨</div>
-        
+      <main className="pb-16">
         <div className="container mx-auto px-4">
           {loading ? (
             <div className="flex items-center justify-center py-20">
@@ -186,15 +150,10 @@ const AllToys = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-card border-t py-8 relative overflow-hidden">
-        {/* Footer decorative elements */}
-        <div className="absolute top-2 left-[10%] text-4xl opacity-20 animate-float pointer-events-none">🎄</div>
-        <div className="absolute top-2 right-[10%] text-4xl opacity-20 animate-bounce-fun pointer-events-none" style={{ animationDelay: '0.5s' }}>⛄</div>
-        <div className="absolute top-1/2 -translate-y-1/2 left-[30%] text-3xl opacity-20 animate-wiggle pointer-events-none" style={{ animationDelay: '1s' }}>✨</div>
-        <div className="absolute top-1/2 -translate-y-1/2 right-[30%] text-3xl opacity-20 animate-float pointer-events-none" style={{ animationDelay: '1.5s' }}>🌟</div>
+      <footer className="bg-card border-t py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
-            © 2025 Santa's Finally Online. Spreading Christmas joy, one amazing toy at a time! 🎅🎄✨
+            © 2025 ToyVault. The best toys, delivered to your door. ⚡
           </p>
         </div>
       </footer>

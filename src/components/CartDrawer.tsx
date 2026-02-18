@@ -140,16 +140,9 @@ export const CartDrawer = () => {
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-lg font-semibold">Total</span>
                     <span className="text-xl font-bold">
-                      {currency} {totalPrice.toFixed(2)}
+                      ${totalPrice.toFixed(2)}
                     </span>
                   </div>
-                  {!currencyLoading && currency !== 'KES' && (
-                    <div className="flex justify-end">
-                      <Badge variant="secondary" className="text-xs px-2 py-0.5 gap-1">
-                        🌍 Auto-detected
-                      </Badge>
-                    </div>
-                  )}
                 </div>
                 
                 <Button 
