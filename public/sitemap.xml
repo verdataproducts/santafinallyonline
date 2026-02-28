@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://bigtoyvault.store/</loc>
+    <loc>https://www.bigtoyvault.store/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://bigtoyvault.store/all-toys</loc>
+    <loc>https://www.bigtoyvault.store/all-toys</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bigtoyvault.store/product/nintendo-switch</loc>
+    <loc>https://www.bigtoyvault.store/product/nintendo-switch</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://bigtoyvault.store/product/barbie-dreamhouse</loc>
+    <loc>https://www.bigtoyvault.store/product/barbie-dreamhouse</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://bigtoyvault.store/product/hot-wheels-garage</loc>
+    <loc>https://www.bigtoyvault.store/product/hot-wheels-garage</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://bigtoyvault.store/product/lego-panda-family</loc>
+    <loc>https://www.bigtoyvault.store/product/lego-panda-family</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
