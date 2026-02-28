@@ -1,4 +1,4 @@
-const ALLOWED_ORIGIN = Deno.env.get("ALLOWED_ORIGIN") || "https://bigtoyvault.store";
+const ALLOWED_ORIGIN = Deno.env.get("ALLOWED_ORIGIN") || "https://www.bigtoyvault.store";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
@@ -45,7 +45,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const BASE_URL = 'https://bigtoyvault.store';
+    const BASE_URL = 'https://www.bigtoyvault.store';
     const today = new Date().toISOString().split('T')[0];
 
     let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
