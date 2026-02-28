@@ -1,42 +1,15 @@
 const ALLOWED_ORIGIN = Deno.env.get("ALLOWED_ORIGIN") || "https://www.bigtoyvault.store";
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// Local product handles (mirroring src/lib/products.ts)
 const productHandles = [
-  "baby-alive-growing-up-happy-doll",
-  "barbie-dreamhouse-2025",
-  "busy-board-montessori-cube",
-  "connect-4-frenzy",
-  "construction-vehicle-set",
-  "dinosaur-excavation-kit",
-  "exploding-pigeon-game",
-  "fashion-design-studio-kit",
-  "fisher-price-learning-tablet",
-  "gui-gui-slime-kit",
-  "hot-wheels-ultimate-garage",
-  "kanoodle-sudoqube",
+  "nintendo-switch",
+  "barbie-dreamhouse",
+  "hot-wheels-garage",
   "lego-panda-family",
-  "lol-surprise-dolls",
-  "magna-tiles-deluxe-set",
-  "melissa-doug-wooden-puzzle",
-  "montessori-busy-book",
-  "musical-learning-drum",
-  "nerf-elite-2-blaster",
-  "nintendo-switch-lite",
-  "playdoh-barbie-fashion",
-  "playdoh-variety-pack",
-  "pop-tubes-fidget-set",
-  "silicone-stacking-blocks",
-  "spiderman-vs-venom",
-  "squishmallows-building-set",
-  "stacking-rings-tower",
-  "toothless-night-fury-dragon",
-  "water-drawing-mat",
-  "wooden-pounding-bench",
 ];
 
 Deno.serve(async (req) => {
@@ -57,6 +30,9 @@ Deno.serve(async (req) => {
     // All toys page
     sitemap += `  <url>\n    <loc>${BASE_URL}/all-toys</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
 
+    // Checkout page
+    sitemap += `  <url>\n    <loc>${BASE_URL}/checkout</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.5</priority>\n  </url>\n`;
+
     // Product pages
     for (const handle of productHandles) {
       sitemap += `  <url>\n    <loc>${BASE_URL}/product/${handle}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
@@ -67,7 +43,7 @@ Deno.serve(async (req) => {
     return new Response(sitemap, {
       headers: {
         ...corsHeaders,
-        'Content-Type': 'application/xml',
+        'Content-Type': 'application/xml; charset=utf-8',
         'Cache-Control': 'public, max-age=3600',
       },
     });
