@@ -50,7 +50,7 @@ export const generateOrganizationStructuredData = () => {
     "@type": "Organization",
     "name": "ToyVault",
     "description": "Modern online toy store delivering the hottest toys fast",
-    "url": "https://santasfinally.online",
+    "url": "https://bigtoyvault.store",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+1-912-303-6921",
