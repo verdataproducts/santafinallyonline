@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Gift } from 'lucide-react';
+import { Loader2, ShieldCheck } from 'lucide-react';
 import { z } from 'zod';
 
 const authSchema = z.object({
@@ -111,10 +111,10 @@ export default function Auth() {
       <Card className="w-full max-w-md bg-card/95 backdrop-blur">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <Gift className="h-12 w-12 text-christmas-red" />
+            <ShieldCheck className="h-12 w-12 text-primary" />
           </div>
-          <CardTitle className="text-2xl font-display">Santa's Admin Portal</CardTitle>
-          <CardDescription>Sign in to manage your store</CardDescription>
+          <CardTitle className="text-2xl font-display">ToyVault Admin</CardTitle>
+          <CardDescription>Sign in to manage your ToyVault store at bigtoyvault.store</CardDescription>
         </CardHeader>
         
         <Tabs defaultValue="signin" className="w-full">
@@ -131,7 +131,7 @@ export default function Auth() {
                   <Input
                     id="signin-email"
                     type="email"
-                    placeholder="santa@northpole.com"
+                    placeholder="admin@bigtoyvault.store"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isLoading}
@@ -173,7 +173,7 @@ export default function Auth() {
                   <Input
                     id="signup-name"
                     type="text"
-                    placeholder="Santa Claus"
+                    placeholder="Your Name"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     disabled={isLoading}
@@ -185,7 +185,7 @@ export default function Auth() {
                   <Input
                     id="signup-email"
                     type="email"
-                    placeholder="santa@northpole.com"
+                    placeholder="you@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isLoading}
