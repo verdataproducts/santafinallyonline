@@ -11,6 +11,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.bigtoyvault.store/checkout</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://www.bigtoyvault.store/product/nintendo-switch</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
