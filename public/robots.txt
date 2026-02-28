@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://cmmilrmzcwldnwgtjyue.supabase.co/functions/v1/generate-sitemap
+Sitemap: https://santafinallyonline.lovable.app/sitemap.xml
