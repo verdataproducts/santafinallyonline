@@ -2,8 +2,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useCartStore } from "@/stores/cartStore";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-
-const PAYPAL_CLIENT_ID = "AVjsE0o24_dJT779YiN6CsG8k-8EmVl_jw0DlwVN_zQ4MoE_KM51iXMN8LYymAK_e8F6Y8KoiABYfXrE";
+import { usePayPalClientId } from "@/hooks/usePayPalClientId";
 
 export interface ShippingInfo {
   fullName: string;
@@ -24,8 +23,10 @@ interface PayPalCheckoutButtonProps {
 export function PayPalCheckoutButton({ totalPrice, shippingInfo, onSuccess }: PayPalCheckoutButtonProps) {
   const clearCart = useCartStore(state => state.clearCart);
   const items = useCartStore(state => state.items);
+  const { clientId, isLoading: isLoadingPayPal } = usePayPalClientId();
 
   if (totalPrice <= 0) return null;
+  if (isLoadingPayPal || !clientId) return <div className="text-center text-sm text-muted-foreground py-4">Loading payment...</div>;
 
   const saveOrder = async (paypalOrderId?: string, paypalPayerId?: string) => {
     if (!shippingInfo) return null;
@@ -56,7 +57,7 @@ export function PayPalCheckoutButton({ totalPrice, shippingInfo, onSuccess }: Pa
   };
 
   return (
-    <PayPalScriptProvider options={{ clientId: PAYPAL_CLIENT_ID, currency: "USD", intent: "capture" }}>
+    <PayPalScriptProvider options={{ clientId, currency: "USD", intent: "capture" }}>
       <PayPalButtons
         style={{ layout: "vertical", shape: "pill", label: "checkout" }}
         createOrder={(_data, actions) => {
