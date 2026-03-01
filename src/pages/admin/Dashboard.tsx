@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Package, FileText, ShoppingCart, TrendingUp } from 'lucide-react';
 import { getProducts } from '@/lib/products';
 import { supabase } from '@/integrations/supabase/client';
+import { PayPalSettings } from '@/components/admin/PayPalSettings';
 
 export default function AdminDashboard() {
   const [productCount] = useState(getProducts().length);
@@ -83,6 +84,8 @@ export default function AdminDashboard() {
             </Card>
           ))}
         </div>
+
+        <PayPalSettings />
 
         <Card>
           <CardHeader>
