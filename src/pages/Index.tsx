@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getProducts, Product } from "@/lib/products";
+import { Product } from "@/lib/products";
+import { useProducts } from "@/hooks/useProducts";
 import { ProductCard } from "@/components/ProductCard";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -20,7 +21,7 @@ import { motion } from "framer-motion";
 import toyvaultLogo from "@/assets/toyvault-logo.png";
 
 const Index = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const { data: products = [] } = useProducts();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedAge, setSelectedAge] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -55,9 +56,7 @@ const Index = () => {
     return matchesCategory && matchesAge && matchesSearch;
   });
 
-  useEffect(() => {
-    setProducts(getProducts());
-  }, []);
+  // Products are now fetched via useProducts hook
 
   const handleAddToCart = (product: Product) => {
     addItem({ product, quantity: 1 });

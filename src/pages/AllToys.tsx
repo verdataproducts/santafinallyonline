@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getProducts, Product } from "@/lib/products";
+import { Product } from "@/lib/products";
+import { useProducts } from "@/hooks/useProducts";
 import { SEO } from "@/components/SEO";
 import { generateBreadcrumbStructuredData } from "@/utils/structuredData";
 import { ProductCard } from "@/components/ProductCard";
@@ -16,7 +16,7 @@ import { motion } from "framer-motion";
 import toyvaultLogo from "@/assets/toyvault-logo.png";
 
 const AllToys = () => {
-  const [products] = useState<Product[]>(getProducts());
+  const { data: products = [] } = useProducts();
   const addItem = useCartStore(state => state.addItem);
   const { fireworksBurst } = useConfetti();
 

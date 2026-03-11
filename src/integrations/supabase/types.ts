@@ -71,6 +71,51 @@ export type Database = {
         }
         Relationships: []
       }
+      products: {
+        Row: {
+          age_range: string[]
+          category: string[]
+          created_at: string
+          description: string
+          handle: string
+          id: string
+          images: string[]
+          in_stock: boolean
+          price: number
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          age_range?: string[]
+          category?: string[]
+          created_at?: string
+          description?: string
+          handle: string
+          id?: string
+          images?: string[]
+          in_stock?: boolean
+          price?: number
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          age_range?: string[]
+          category?: string[]
+          created_at?: string
+          description?: string
+          handle?: string
+          id?: string
+          images?: string[]
+          in_stock?: boolean
+          price?: number
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
