@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProductByHandle, Product } from "@/lib/products";
+import { Product } from "@/lib/products";
+import { useProducts } from "@/hooks/useProducts";
 import { SEO } from "@/components/SEO";
 import { generateProductStructuredData, generateBreadcrumbStructuredData } from "@/utils/structuredData";
 import { Button } from "@/components/ui/button";
