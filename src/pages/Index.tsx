@@ -21,7 +21,7 @@ import { motion } from "framer-motion";
 import toyvaultLogo from "@/assets/toyvault-logo.png";
 
 const Index = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const { data: products = [] } = useProducts();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedAge, setSelectedAge] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
