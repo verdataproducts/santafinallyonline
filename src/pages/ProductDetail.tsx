@@ -22,18 +22,12 @@ import {
 
 const ProductDetail = () => {
   const { handle } = useParams<{ handle: string }>();
-  const [product, setProduct] = useState<Product | null>(null);
+  const { data: products = [] } = useProducts();
+  const product = products.find(p => p.handle === handle) || null;
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const addItem = useCartStore(state => state.addItem);
   const { formatPrice } = useCurrency();
   const { fireworksBurst } = useConfetti();
-
-  useEffect(() => {
-    if (handle) {
-      const found = getProductByHandle(handle);
-      setProduct(found || null);
-    }
-  }, [handle]);
 
   const handleAddToCart = () => {
     if (!product) return;

@@ -16,7 +16,7 @@ import { motion } from "framer-motion";
 import toyvaultLogo from "@/assets/toyvault-logo.png";
 
 const AllToys = () => {
-  const [products] = useState<Product[]>(getProducts());
+  const { data: products = [] } = useProducts();
   const addItem = useCartStore(state => state.addItem);
   const { fireworksBurst } = useConfetti();
 

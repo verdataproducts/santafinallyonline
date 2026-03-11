@@ -56,9 +56,7 @@ const Index = () => {
     return matchesCategory && matchesAge && matchesSearch;
   });
 
-  useEffect(() => {
-    setProducts(getProducts());
-  }, []);
+  // Products are now fetched via useProducts hook
 
   const handleAddToCart = (product: Product) => {
     addItem({ product, quantity: 1 });
