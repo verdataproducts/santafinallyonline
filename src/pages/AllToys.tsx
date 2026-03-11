@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getProducts, Product } from "@/lib/products";
+import { Product } from "@/lib/products";
+import { useProducts } from "@/hooks/useProducts";
 import { SEO } from "@/components/SEO";
 import { generateBreadcrumbStructuredData } from "@/utils/structuredData";
 import { ProductCard } from "@/components/ProductCard";
